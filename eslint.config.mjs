@@ -13,6 +13,20 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    rules: {
+      "indent": ["error", 2],
+      "linebreak-style": ["error", "unix"],
+      "quotes": ["error", "single"],
+      "semi": ["error", "always"],
+      "eol-last": ["error", "always"],
+      "no-extra-semi": ["error"],
+      "object-curly-spacing": ["error", "always"],
+      "newline-before-return": ["error"],
+      "react-hooks/exhaustive-deps": ["off"],
+      "@next/next/no-img-element": ["off"],
+    },
+  },
 ]);
 
 export default eslintConfig;
