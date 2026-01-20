@@ -20,10 +20,27 @@ const skillsFile: PortfolioItem = {
   icon: 'code',
   content: {
     title: 'Technical Skills',
-    tags: [
-      'TypeScript', 'Java', 'React', 'Next.js', 'Node.js',
-      'PostgreSQL', 'MongoDB',
-      'AWS', 'Docker', 'Git', 'GraphQL',
+    tagSections: [
+      {
+        title: 'Languages',
+        tags: ['JavaScript', 'TypeScript', 'Java', 'SQL'],
+      },
+      {
+        title: 'Frontend',
+        tags: ['React', 'Next.js', 'HTML/CSS', 'Tailwind', 'shadcn/ui'],
+      },
+      {
+        title: 'Backend',
+        tags: ['Node.js', 'Express', 'GraphQL', 'REST APIs'],
+      },
+      {
+        title: 'Databases',
+        tags: ['PostgreSQL', 'MongoDB'],
+      },
+      {
+        title: 'DevOps & Tools',
+        tags: ['AWS', 'Docker', 'Git', 'CI/CD', 'Linux'],
+      },
     ],
   },
 };

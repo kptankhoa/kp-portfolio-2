@@ -52,6 +52,23 @@ export function PreviewContent({ item }: PreviewContentProps) {
         </div>
       )}
 
+      {content.tagSections && content.tagSections.length > 0 && (
+        <div className="tag-sections">
+          {content.tagSections.map((section) => (
+            <div key={section.title} className="preview-section">
+              <h3 className="section-title">{section.title}</h3>
+              <div className="tags">
+                {section.tags.map((tag) => (
+                  <span key={tag} className="tag">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       {content.tags && content.tags.length > 0 && (
         <div className="preview-section">
           <h3 className="section-title">Technologies</h3>
@@ -134,7 +151,17 @@ export function PreviewContent({ item }: PreviewContentProps) {
         }
 
         .preview-section {
-          margin-bottom: 28px;
+          margin-bottom: 24px;
+        }
+
+        .tag-sections {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .tag-sections .preview-section {
+          margin-bottom: 16px;
         }
 
         .image-section {

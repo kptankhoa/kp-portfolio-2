@@ -1,3 +1,8 @@
+export interface TagSection {
+  title: string;
+  tags: string[];
+}
+
 export interface PortfolioItem {
   id: string;
   name: string;
@@ -11,7 +16,8 @@ export interface PortfolioItem {
     subtitle?: string;
     description?: string;
     links?: { label: string; url: string; icon?: string }[];
-    tags?: string[];
+    tags?: string[]; // Simple flat tags
+    tagSections?: TagSection[]; // Categorized tags
     image?: string; // Header image (e.g., company logo)
     previewImage?: string; // Large preview image
     embed?: string; // URL for embedded content (e.g., PDF)
