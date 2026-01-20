@@ -23,6 +23,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import BuildIcon from '@mui/icons-material/Build';
 import StorageIcon from '@mui/icons-material/Storage';
 import CloudIcon from '@mui/icons-material/Cloud';
+import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
+import ForumIcon from '@mui/icons-material/Forum';
 
 // Icon map for portfolio items (files, apps, etc.)
 export const itemIconMap: Record<string, React.ComponentType<{ sx?: object }>> = {
@@ -46,6 +48,9 @@ export const itemIconMap: Record<string, React.ComponentType<{ sx?: object }>> =
   build: BuildIcon,
   storage: StorageIcon,
   cloud: CloudIcon,
+  telegram: TelegramIcon,
+  music: LibraryMusicIcon,
+  forum: ForumIcon,
 };
 
 // Icon map for link buttons (social links, etc.)
