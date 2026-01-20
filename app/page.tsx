@@ -1,10 +1,11 @@
 'use client';
 
+import { Suspense } from 'react';
 import { Header, FinderColumn, PreviewPane } from './components';
 import { portfolioData, summaryData } from './data';
 import { useFinderNavigation, useKeyboardNavigation, useAutoScroll } from './hooks';
 
-export default function Home() {
+function HomeContent() {
   const {
     selections,
     columns,
@@ -22,34 +23,44 @@ export default function Home() {
   const lastColumnRef = useAutoScroll<HTMLDivElement>(selections);
 
   return (
+    <>
+      <Header
+        firstName={summaryData.firstName}
+        lastName={summaryData.lastName}
+        selections={selections}
+        onBreadcrumbClick={handleBreadcrumbClick}
+      />
+
+      <div className={`content ${mobilePreviewOpen ? 'preview-open' : ''}`}>
+        <div className="columns-container">
+          {columns.map((column, index) => (
+            <FinderColumn
+              key={index}
+              ref={index === columns.length - 1 ? lastColumnRef : null}
+              items={column.items}
+              selectedId={column.selectedId}
+              openIds={openIds}
+              onSelect={(item) => handleSelect(item, index)}
+            />
+          ))}
+        </div>
+        <PreviewPane
+          item={previewItem}
+          isMobileFullscreen={mobilePreviewOpen}
+          onMobileBack={handleMobileBack}
+        />
+      </div>
+    </>
+  );
+}
+
+export default function Home() {
+  return (
     <div className="wrapper">
       <main className="main">
-        <Header
-          firstName={summaryData.firstName}
-          lastName={summaryData.lastName}
-          selections={selections}
-          onBreadcrumbClick={handleBreadcrumbClick}
-        />
-
-        <div className={`content ${mobilePreviewOpen ? 'preview-open' : ''}`}>
-          <div className="columns-container">
-            {columns.map((column, index) => (
-              <FinderColumn
-                key={index}
-                ref={index === columns.length - 1 ? lastColumnRef : null}
-                items={column.items}
-                selectedId={column.selectedId}
-                openIds={openIds}
-                onSelect={(item) => handleSelect(item, index)}
-              />
-            ))}
-          </div>
-          <PreviewPane
-            item={previewItem}
-            isMobileFullscreen={mobilePreviewOpen}
-            onMobileBack={handleMobileBack}
-          />
-        </div>
+        <Suspense fallback={null}>
+          <HomeContent />
+        </Suspense>
       </main>
 
       <style jsx>{`
@@ -77,21 +88,6 @@ export default function Home() {
           overflow: hidden;
         }
 
-        .content {
-          flex: 1;
-          display: flex;
-          overflow-x: auto;
-          overflow-y: hidden;
-          position: relative;
-          scroll-behavior: smooth;
-        }
-
-        .columns-container {
-          display: flex;
-          flex-shrink: 0;
-          scroll-behavior: smooth;
-        }
-
         /* Tablet and below - full height */
         @media (max-width: 1024px) {
           .wrapper {
@@ -105,6 +101,23 @@ export default function Home() {
             border-radius: 0;
             border: none;
           }
+        }
+      `}</style>
+
+      <style jsx global>{`
+        .content {
+          flex: 1;
+          display: flex;
+          overflow-x: auto;
+          overflow-y: hidden;
+          position: relative;
+          scroll-behavior: smooth;
+        }
+
+        .columns-container {
+          display: flex;
+          flex-shrink: 0;
+          scroll-behavior: smooth;
         }
 
         /* Mobile - hide preview by default, show columns */

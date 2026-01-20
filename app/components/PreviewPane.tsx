@@ -202,8 +202,11 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
 
         .preview-scroll-wrapper {
           flex: 1;
+          display: flex;
+          flex-direction: column;
           overflow-y: auto;
           border-radius: 8px;
+          min-height: 0;
         }
 
         .mobile-header {
