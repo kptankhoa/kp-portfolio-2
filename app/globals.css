@@ -40,7 +40,7 @@ body {
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-system);
-  font-size: 14px;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;

@@ -127,7 +127,7 @@ export function Header({ firstName, lastName, selections, onBreadcrumbClick }: H
           border-radius: 4px;
           color: var(--text-secondary);
           font-family: inherit;
-          font-size: 14px;
+          font-size: 16px;
           cursor: pointer;
           transition: all 0.15s;
           flex-shrink: 0;

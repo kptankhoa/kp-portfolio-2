@@ -50,7 +50,7 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
 
           .empty-state p {
             margin: 16px 0 0;
-            font-size: 14px;
+            font-size: 16px;
           }
 
           @media (max-width: 768px) {
@@ -222,7 +222,7 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
           border: none;
           color: var(--accent-light);
           font-family: inherit;
-          font-size: 14px;
+          font-size: 16px;
           cursor: pointer;
           transition: opacity 0.15s;
         }
@@ -307,7 +307,7 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
 
         .preview-subtitle {
           margin: 0;
-          font-size: 14px;
+          font-size: 16px;
           color: var(--accent);
         }
 
@@ -339,7 +339,7 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
 
         .preview-description {
           margin: 0;
-          font-size: 14px;
+          font-size: 16px;
           line-height: 1.8;
           color: var(--text-secondary);
           white-space: pre-line;

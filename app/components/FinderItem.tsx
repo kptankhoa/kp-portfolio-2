@@ -80,7 +80,7 @@ export function FinderItem({ item, isSelected, isOpen = false, onClick }: Finder
           border-radius: 8px;
           color: var(--text-primary);
           font-family: inherit;
-          font-size: 14px;
+          font-size: 16px;
           text-align: left;
           cursor: pointer;
           transition: all 0.15s;
