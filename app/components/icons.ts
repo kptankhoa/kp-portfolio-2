@@ -28,7 +28,7 @@ import ForumIcon from '@mui/icons-material/Forum';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import DryCleaningIcon from '@mui/icons-material/DryCleaning';
-import ParkIcon from '@mui/icons-material/Park';
+import ForestIcon from '@mui/icons-material/Forest';
 
 // Icon map for portfolio items (files, apps, etc.)
 export const itemIconMap: Record<string, React.ComponentType<{ sx?: object }>> = {
@@ -58,7 +58,7 @@ export const itemIconMap: Record<string, React.ComponentType<{ sx?: object }>> =
   health: LocalHospitalIcon,
   eye: RemoveRedEyeIcon,
   fashion: DryCleaningIcon,
-  eco: ParkIcon,
+  eco: ForestIcon,
 };
 
 // Icon map for link buttons (social links, etc.)

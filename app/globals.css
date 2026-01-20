@@ -1,20 +1,29 @@
 @import 'tailwindcss';
 
 :root {
-  /* Dark theme with moss green accent */
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
-  --bg-tertiary: #1a1a1a;
-  --border-color: #1a3a2a;
+  /* Gruvbox Dark Hard High Contrast theme */
+  --bg-primary: #1d2021;
+  --bg-secondary: #282828;
+  --bg-tertiary: #3c3836;
+  --border-color: #665c54;
 
-  --text-primary: #ffffff;
-  --text-secondary: #888888;
-  --text-muted: #555555;
+  /* Higher contrast text */
+  --text-primary: #fffef8;
+  --text-secondary: #fbf1c7;
+  --text-muted: #bdae93;
 
-  /* Moss green accent from kp-portfolio.bak */
-  --accent-dark: #14532d;
-  --accent: #059669;
-  --accent-light: #34d399;
+  /* Gruvbox bright aqua accent */
+  --accent-dark: #427b58;
+  --accent: #8ec07c;
+  --accent-light: #b8bb26;
+
+  /* Gruvbox extra colors */
+  --gruvbox-red: #fb4934;
+  --gruvbox-green: #b8bb26;
+  --gruvbox-yellow: #fabd2f;
+  --gruvbox-blue: #83a598;
+  --gruvbox-purple: #d3869b;
+  --gruvbox-orange: #fe8019;
 
   --font-system: 'Cutive Mono', 'SF Mono', 'Fira Code', 'Consolas', monospace;
 }
@@ -56,7 +65,7 @@ body::before {
   height: 100%;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.4;
+  opacity: 0.15;
   background-image: url('https://grainy-gradients.vercel.app/noise.svg');
   background-repeat: repeat;
 }
@@ -82,6 +91,6 @@ body::before {
 
 /* Selection styling */
 ::selection {
-  background: var(--accent);
-  color: white;
+  background: var(--gruvbox-yellow);
+  color: var(--bg-primary);
 }
