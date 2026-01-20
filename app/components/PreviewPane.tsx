@@ -76,45 +76,54 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
         </div>
       )}
 
-      {content.embed ? (
-        <div className="preview-embed">
-          <div className="embed-header">
-            <h1 className="embed-title">{content.title || item.name}</h1>
-            {content.links && content.links.length > 0 && (
-              <div className="embed-links">
-                {content.links.map((link) => {
-                  const IconComponent = link.icon ? linkIconMap[link.icon] : null;
+      <div className="preview-scroll-wrapper">
+        {content.embed ? (
+          <div className="preview-embed">
+            <div className="embed-header">
+              <h1 className="embed-title">{content.title || item.name}</h1>
+              {content.links && content.links.length > 0 && (
+                <div className="embed-links">
+                  {content.links.map((link) => {
+                    const IconComponent = link.icon ? linkIconMap[link.icon] : null;
 
-                  return (
-                    <a
-                      key={link.url}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="link-button"
-                    >
-                      {IconComponent && <IconComponent sx={{ fontSize: 18 }} />}
-                      {link.label}
-                      {!IconComponent && <OpenInNewIcon sx={{ fontSize: 14 }} />}
-                    </a>
-                  );
-                })}
-              </div>
-            )}
+                    return (
+                      <a
+                        key={link.url}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        className="link-button"
+                      >
+                        {IconComponent && <IconComponent sx={{ fontSize: 18 }} />}
+                        {link.label}
+                        {!IconComponent && <OpenInNewIcon sx={{ fontSize: 14 }} />}
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+            <object
+              className="embed-object"
+              data={content.embed}
+              type="application/pdf"
+            >
+              <p>Unable to display PDF. <a href={content.embed} target="_blank" rel="noopener noreferrer nofollow">Download instead</a>.</p>
+            </object>
           </div>
-          <object
-            className="embed-object"
-            data={content.embed}
-            type="application/pdf"
-          >
-            <p>Unable to display PDF. <a href={content.embed} target="_blank" rel="noopener noreferrer">Download instead</a>.</p>
-          </object>
-        </div>
-      ) : (
-        <div className="preview-content">
+        ) : (
+          <div className="preview-content">
           <div className="preview-header">
             <div className="preview-icon">
-              <PreviewIcon type={item.type} customIcon={item.icon} />
+              {content.image ? (
+                <img
+                  src={content.image}
+                  alt={content.title || item.name}
+                  className="header-image"
+                />
+              ) : (
+                <PreviewIcon type={item.type} customIcon={item.icon} />
+              )}
             </div>
             <div className="preview-titles">
               <h1 className="preview-title">{content.title || item.name}</h1>
@@ -124,10 +133,10 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
             </div>
           </div>
 
-          {content.image && (
+          {content.previewImage && (
             <div className="preview-section image-section">
               <img
-                src={content.image}
+                src={content.previewImage}
                 alt={content.title || item.name}
                 className="preview-image"
               />
@@ -164,7 +173,7 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
                       key={link.url}
                       href={link.url}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener noreferrer nofollow"
                       className="link-button"
                     >
                       {IconComponent && <IconComponent sx={{ fontSize: 18 }} />}
@@ -177,7 +186,8 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
             </div>
           )}
         </div>
-      )}
+        )}
+      </div>
 
       <style jsx>{`
         .preview-pane {
@@ -186,7 +196,14 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
           background: var(--bg-secondary);
           display: flex;
           flex-direction: column;
+          padding: 16px;
+          padding-right: 0;
+        }
+
+        .preview-scroll-wrapper {
+          flex: 1;
           overflow-y: auto;
+          border-radius: 8px;
         }
 
         .mobile-header {
@@ -212,7 +229,8 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
         }
 
         .preview-content {
-          padding: 40px;
+          padding: 24px;
+          padding-right: 40px;
         }
 
         .preview-embed {
@@ -262,6 +280,13 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
         .preview-icon {
           flex-shrink: 0;
           color: var(--accent-light);
+        }
+
+        :global(.header-image) {
+          width: 48px;
+          height: 48px;
+          object-fit: contain;
+          border-radius: 8px;
         }
 
         .preview-titles {
@@ -365,10 +390,15 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
             position: absolute;
             inset: 0;
             z-index: 10;
+            padding: 8px;
           }
 
           .preview-pane.mobile-fullscreen {
             display: flex;
+          }
+
+          .preview-scroll-wrapper {
+            border-radius: 4px;
           }
 
           .mobile-header {

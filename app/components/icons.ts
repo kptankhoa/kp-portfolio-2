@@ -25,6 +25,10 @@ import StorageIcon from '@mui/icons-material/Storage';
 import CloudIcon from '@mui/icons-material/Cloud';
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import ForumIcon from '@mui/icons-material/Forum';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import DryCleaningIcon from '@mui/icons-material/DryCleaning';
+import ParkIcon from '@mui/icons-material/Park';
 
 // Icon map for portfolio items (files, apps, etc.)
 export const itemIconMap: Record<string, React.ComponentType<{ sx?: object }>> = {
@@ -51,6 +55,10 @@ export const itemIconMap: Record<string, React.ComponentType<{ sx?: object }>> =
   telegram: TelegramIcon,
   music: LibraryMusicIcon,
   forum: ForumIcon,
+  health: LocalHospitalIcon,
+  eye: RemoveRedEyeIcon,
+  fashion: DryCleaningIcon,
+  eco: ParkIcon,
 };
 
 // Icon map for link buttons (social links, etc.)

@@ -9,7 +9,7 @@ import { imagesFolder } from './images';
 
 export const portfolioData: PortfolioItem[] = [
   aboutMeFolder,
-  // experienceFolder,
+  experienceFolder,
   projectsFolder,
   imagesFolder,
 ];

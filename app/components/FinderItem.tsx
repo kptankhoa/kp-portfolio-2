@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
   FolderIcon,
@@ -28,13 +29,39 @@ export function FinderItem({ item, isSelected, isOpen = false, onClick }: Finder
       onClick={onClick}
     >
       <span className="item-icon">
-        <ItemIcon
-          type={item.type}
-          customIcon={item.icon}
-          isOpen={isOpen && item.type === 'folder'}
-        />
+        {item.folderImage ? (
+          <Image
+            src={item.folderImage}
+            alt={item.name}
+            width={20}
+            height={20}
+            className="folder-image"
+          />
+        ) : (
+          <ItemIcon
+            type={item.type}
+            customIcon={item.icon}
+            isOpen={isOpen && item.type === 'folder'}
+          />
+        )}
       </span>
-      <span className="item-name">{item.name}</span>
+      <span className="item-titles">
+        <span className="item-name">{item.name}</span>
+        {item.subtitle && (
+          <span
+            className="item-subtitle"
+            style={{
+              display: 'block',
+              fontSize: '12px',
+              color: 'var(--text-secondary, #888)',
+              marginTop: '2px',
+              fontWeight: 400,
+            }}
+          >
+            {item.subtitle}
+          </span>
+        )}
+      </span>
       {hasChildren && (
         <span className="item-arrow">
           <ChevronRightIcon sx={{ fontSize: 16 }} />
@@ -76,6 +103,11 @@ export function FinderItem({ item, isSelected, isOpen = false, onClick }: Finder
           height: 24px;
           margin-right: 12px;
           flex-shrink: 0;
+        }
+
+        :global(.folder-image) {
+          border-radius: 4px;
+          object-fit: contain;
         }
 
         .item-name {

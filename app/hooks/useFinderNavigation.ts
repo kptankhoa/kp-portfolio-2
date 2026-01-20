@@ -69,6 +69,15 @@ export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOp
     setSelections((prev) => {
       const newSelections = prev.slice(0, level);
       newSelections[level] = item;
+
+      // Auto-select "about.txt" when clicking a company folder
+      if (item.id.startsWith('company-') && item.children?.length) {
+        const aboutFile = item.children.find((child) => child.name === 'about.txt');
+        if (aboutFile) {
+          newSelections[level + 1] = aboutFile;
+        }
+      }
+
       return newSelections;
     });
 
