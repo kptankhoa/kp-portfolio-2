@@ -30,7 +30,7 @@ export const FinderColumn = forwardRef<HTMLDivElement, FinderColumnProps>(
         <style jsx>{`
           .finder-column {
             min-width: 280px;
-            max-width: 320px;
+            width: max-content;
             flex-shrink: 0;
             display: flex;
             flex-direction: column;

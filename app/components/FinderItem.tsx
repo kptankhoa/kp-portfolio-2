@@ -56,6 +56,7 @@ export function FinderItem({ item, isSelected, isOpen = false, onClick }: Finder
               color: 'var(--text-secondary, #888)',
               marginTop: '2px',
               fontWeight: 400,
+              whiteSpace: 'nowrap',
             }}
           >
             {item.subtitle}
@@ -110,10 +111,12 @@ export function FinderItem({ item, isSelected, isOpen = false, onClick }: Finder
           object-fit: contain;
         }
 
-        .item-name {
+        .item-titles {
           flex: 1;
-          overflow: hidden;
-          text-overflow: ellipsis;
+        }
+
+        .item-name {
+          display: block;
           white-space: nowrap;
         }
 
