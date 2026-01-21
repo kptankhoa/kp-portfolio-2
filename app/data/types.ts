@@ -16,7 +16,6 @@ export interface PortfolioItem {
     subtitle?: string;
     description?: string;
     links?: { label: string; url: string; icon?: string }[];
-    tags?: string[]; // Simple flat tags
     tagSections?: TagSection[]; // Categorized tags
     image?: string; // Header image (e.g., company logo)
     previewImage?: string; // Large preview image

@@ -31,7 +31,7 @@ const skillsFile: PortfolioItem = {
       },
       {
         title: 'Backend',
-        tags: ['Node.js', 'Express', 'GraphQL', 'REST APIs'],
+        tags: ['Node.js', 'Express.js', 'GraphQL', 'REST APIs'],
       },
       {
         title: 'Databases',

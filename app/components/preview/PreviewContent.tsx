@@ -69,19 +69,6 @@ export function PreviewContent({ item }: PreviewContentProps) {
         </div>
       )}
 
-      {content.tags && content.tags.length > 0 && (
-        <div className="preview-section">
-          <h3 className="section-title">Technologies</h3>
-          <div className="tags">
-            {content.tags.map((tag) => (
-              <span key={tag} className="tag">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
-
       {content.links && content.links.length > 0 && (
         <div className="preview-section">
           <div className="links">

@@ -15,7 +15,7 @@ const codelinkAbout: PortfolioItem = {
     image: '/codelink.png',
     description: `CodeLink is a software development company specializing in building innovative digital solutions.
 
-Working here since 2024.`,
+    Working here since 2024.`,
     links: [
       { label: 'Website', url: 'https://codelink.io', icon: 'website' },
       { label: 'LinkedIn', url: 'https://linkedin.com/company/codelink.io', icon: 'linkedin' },
@@ -37,7 +37,12 @@ Key responsibilities:
 • Maintaining the central storage for all marketing and e-commerce images, videos, and 3D files
 • Building custom workflows and metadata using Nuxeo Studio
 • Keeping the system stable and fast for global teams`,
-    tags: ['Nuxeo', 'Java', 'Docker', 'Elasticsearch', 'React'],
+    tagSections: [
+      {
+        title: 'Technologies',
+        tags: ['Nuxeo', 'Java', 'Docker', 'Elasticsearch', 'React'],
+      },
+    ],
   },
 };
 
@@ -57,7 +62,12 @@ Key responsibilities:
 • Implementing the new landing page with modern design
 • Building responsive UI components
 • Ensuring fast performance and SEO optimization`,
-    tags: ['Next.js', 'shadcn/ui', 'TypeScript', 'Tailwind CSS', 'GraphQL']
+    tagSections: [
+      {
+        title: 'Technologies',
+        tags: ['Next.js', 'shadcn/ui', 'TypeScript', 'Tailwind CSS', 'GraphQL'],
+      },
+    ],
   },
 };
 
@@ -76,7 +86,12 @@ Key responsibilities:
 • Working with legacy AngularJS components alongside modern React
 • Collaborating with backend teams on .NET API integrations
 • Ensuring smooth user experience for legal teams handling complex immigration workflows`,
-    tags: ['React', 'AngularJS', '.NET', 'AWS', 'Microsoft SQL Server'],
+    tagSections: [
+      {
+        title: 'Technologies',
+        tags: ['React', 'AngularJS', '.NET', 'AWS', 'Microsoft SQL Server'],
+      },
+    ],
   },
 };
 
@@ -102,9 +117,10 @@ const vinbrainAbout: PortfolioItem = {
     title: 'VinBrain',
     subtitle: 'AI Healthcare Company',
     image: '/vinbrain.png',
-    description: `VinBrain is a subsidiary of Vingroup, focusing on AI-powered healthcare solutions.
-
-Worked here from 2021 to 2024.`,
+    description: `VinBrain was a subsidiary of Vingroup, focusing on AI-powered healthcare solutions.
+    In December 2024, VinBrain was acquired by NVIDIA and now serves as the foundation for NVIDIA's AI research and development center in Vietnam.
+    
+    Worked here from 2021 to 2024.`,
     links: [
       { label: 'Website', url: 'https://vinbrain.net', icon: 'website' },
       { label: 'LinkedIn', url: 'https://linkedin.com/company/vinbrain', icon: 'linkedin' },
@@ -128,7 +144,12 @@ Key features include:
 • Support for hospital management and professional clinical activities
 
 The platform was deployed at major institutions including the 108 Military Central Hospital in Vietnam, accelerating digital transformation in healthcare. Built using NVIDIA's accelerated computing resources and integrated into VinBrain's broader AI product ecosystem alongside DrAid.`,
-    tags: ['ChatGPT', 'JavaSpring', 'PostgreSQL', 'Docker', 'React', 'Redux', 'Firebase'],
+    tagSections: [
+      {
+        title: 'Technologies',
+        tags: ['ChatGPT', 'JavaSpring', 'PostgreSQL', 'Docker', 'React', 'Redux', 'Firebase'],
+      },
+    ],
   },
 };
 
@@ -148,7 +169,12 @@ Key products include:
 • DrAid AI PACS Cloud: Cloud-based storage and workflow solution for remote access to medical records
 
 The platform is used by nearly 2,000 doctors across 100+ hospitals including facilities in the U.S., Vietnam, and Myanmar. Strategic partnerships with Stanford University, Microsoft Azure, and NVIDIA helped reduce image interpretation time by up to 30%.`,
-    tags: ['JavaSpring', 'PostgreSQL', 'Docker', 'React', 'Redux'],
+    tagSections: [
+      {
+        title: 'Technologies',
+        tags: ['JavaSpring', 'PostgreSQL', 'Docker', 'React', 'Redux'],
+      },
+    ],
   },
 };
 
