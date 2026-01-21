@@ -66,13 +66,13 @@ const linksFile: PortfolioItem = {
   icon: 'link',
   content: {
     title: 'Connect with me',
-    description: 'Find me on these platforms\nMy email: me@kptankhoa.dev',
+    description: `My email: ${summaryData.email}\nFind me on these platforms:`,
     links: [
-      { label: 'Email', url: 'mailto:me@kptankhoa.dev', icon: 'email' },
-      { label: 'GitHub', url: 'https://github.com/kptankhoa', icon: 'github' },
-      { label: 'LinkedIn', url: 'https://linkedin.com/in/kptankhoa', icon: 'linkedin' },
-      { label: 'Telegram', url: 'https://t.me/kptankhoa', icon: 'telegram' },
-      { label: 'WhatsApp', url: 'https://wa.link/1scboo', icon: 'whatsapp' },
+      { label: 'Email', url: `mailto:${summaryData.email}`, icon: 'email' },
+      { label: 'GitHub', url: summaryData.socialLinks.github, icon: 'github' },
+      { label: 'LinkedIn', url: summaryData.socialLinks.linkedin, icon: 'linkedin' },
+      { label: 'Telegram', url: summaryData.socialLinks.telegram, icon: 'telegram' },
+      { label: 'WhatsApp', url: summaryData.socialLinks.whatsapp, icon: 'whatsapp' },
     ],
   },
 };

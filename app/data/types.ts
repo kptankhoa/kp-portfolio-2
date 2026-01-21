@@ -7,7 +7,7 @@ export interface PortfolioItem {
   id: string;
   name: string;
   subtitle?: string;
-  type: 'folder' | 'file' | 'app' | 'image' | 'link';
+  type: 'folder' | 'file' | 'app' | 'image';
   icon?: string;
   folderImage?: string; // Custom image for folder (e.g., company logo)
   children?: PortfolioItem[];
