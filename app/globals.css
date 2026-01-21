@@ -65,7 +65,7 @@ body::before {
   height: 100%;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.15;
+  opacity: 0.2;
   background-image: url('https://grainy-gradients.vercel.app/noise.svg');
   background-repeat: repeat;
 }
