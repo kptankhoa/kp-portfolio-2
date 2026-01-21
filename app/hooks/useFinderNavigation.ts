@@ -44,6 +44,11 @@ export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOp
   const [mobilePreviewOpen, setMobilePreviewOpen] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
 
+  // Get the deepest selected item for preview
+  const previewItem = [...selections].reverse().find(
+    (item) => item && item.content
+  ) || null;
+
   // Initialize selections from URL on mount (or default path)
   useEffect(() => {
     const pathParam = searchParams.get('path');
@@ -65,6 +70,13 @@ export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOp
     const newUrl = path ? `?path=${path}` : '/';
     window.history.replaceState(null, '', newUrl);
   }, [selections, isInitialized]);
+
+  useEffect(() => {
+    if (!isInitialized) return;
+    if (isMobile && previewItem?.content) {
+      setMobilePreviewOpen(true);
+    }
+  }, [isMobile, isInitialized, previewItem]);
 
   // Select an item at a specific level
   const handleSelect = useCallback((item: PortfolioItem, level: number) => {
@@ -103,7 +115,6 @@ export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOp
   const handleGoBack = useCallback(() => {
     if (mobilePreviewOpen) {
       setMobilePreviewOpen(false);
-      return;
     }
 
     setSelections((prev) => {
@@ -137,11 +148,6 @@ export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOp
   const openIds = selections
     .filter((s): s is PortfolioItem => s !== null && s.type === 'folder' && !!s.children?.length)
     .map((s) => s.id);
-
-  // Get the deepest selected item for preview
-  const previewItem = [...selections].reverse().find(
-    (item) => item && item.content
-  ) || null;
 
   return {
     selections,

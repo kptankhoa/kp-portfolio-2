@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useRef } from 'react';
 import { Header, FinderColumn, PreviewPane } from './components';
 import { portfolioData, summaryData } from './data';
 import { useFinderNavigation, useKeyboardNavigation, useAutoScroll } from './hooks';
@@ -20,7 +20,8 @@ function HomeContent() {
 
   useKeyboardNavigation({ onEscape: handleGoBack });
 
-  const lastColumnRef = useAutoScroll<HTMLDivElement>(selections);
+  const contentContainerRef = useAutoScroll<HTMLDivElement>(selections, !!previewItem);
+  const columnsContainerRef = useAutoScroll<HTMLDivElement>(selections, !previewItem);
 
   return (
     <>
@@ -31,12 +32,11 @@ function HomeContent() {
         onBreadcrumbClick={handleBreadcrumbClick}
       />
 
-      <div className={`content ${mobilePreviewOpen ? 'preview-open' : ''}`}>
-        <div className="columns-container">
+      <div className={`content ${mobilePreviewOpen ? 'preview-open' : ''}`} ref={contentContainerRef}>
+        <div className="columns-container" ref={columnsContainerRef}>
           {columns.map((column, index) => (
             <FinderColumn
               key={index}
-              ref={index === columns.length - 1 ? lastColumnRef : null}
               items={column.items}
               selectedId={column.selectedId}
               openIds={openIds}
@@ -47,7 +47,7 @@ function HomeContent() {
         <PreviewPane
           item={previewItem}
           isMobileFullscreen={mobilePreviewOpen}
-          onMobileBack={handleMobileBack}
+          onMobileBack={handleGoBack}
         />
       </div>
     </>

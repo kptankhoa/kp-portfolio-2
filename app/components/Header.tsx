@@ -3,6 +3,7 @@
 import { useRef, useEffect } from 'react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { PortfolioItem } from '../data';
+import { useAutoScroll } from '../hooks';
 
 interface HeaderProps {
   firstName: string;
@@ -12,20 +13,10 @@ interface HeaderProps {
 }
 
 export function Header({ firstName, lastName, selections, onBreadcrumbClick }: HeaderProps) {
-  const breadcrumbsRef = useRef<HTMLElement>(null);
+  const breadcrumbsRef = useAutoScroll<HTMLDivElement>(selections, true);
 
   // Build breadcrumb path
   const breadcrumbs = selections.filter(Boolean) as PortfolioItem[];
-
-  // Auto-scroll breadcrumbs to the right when they change
-  useEffect(() => {
-    if (breadcrumbsRef.current) {
-      breadcrumbsRef.current.scrollTo({
-        left: breadcrumbsRef.current.scrollWidth,
-        behavior: 'smooth',
-      });
-    }
-  }, [breadcrumbs.length]);
 
   return (
     <header className="header">
