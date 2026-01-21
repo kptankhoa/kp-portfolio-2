@@ -167,8 +167,6 @@ function ItemIcon({ type, customIcon, isOpen }: ItemIconProps) {
   switch (type) {
   case 'app':
     return <AppsIcon sx={iconStyle} />;
-  case 'link':
-    return <LinkIcon sx={iconStyle} />;
   case 'image':
     return <ImageIcon sx={iconStyle} />;
   default:

@@ -225,15 +225,30 @@ export function PreviewContent({ item }: PreviewContentProps) {
         @media (max-width: 768px) {
           .preview-content {
             padding: 24px;
+            text-align: center;
+            width: 100%;
           }
 
           .preview-header {
             flex-direction: column;
+            align-items: center;
             gap: 16px;
+          }
+
+          .preview-titles {
+            text-align: center;
           }
 
           .preview-title {
             font-size: 22px;
+          }
+
+          .tags {
+            justify-content: center;
+          }
+
+          .links {
+            justify-content: center;
           }
         }
       `}</style>

@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { PortfolioItem } from '../data';
+import { useIsMobile } from './useIsMobile';
 
 // Helper: Build selections from path string
 function selectionsFromPath(path: string, data: PortfolioItem[]): (PortfolioItem | null)[] {
@@ -37,6 +38,7 @@ interface UseFinderNavigationOptions {
 
 export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOptions) {
   const searchParams = useSearchParams();
+  const isMobile = useIsMobile();
 
   const [selections, setSelections] = useState<(PortfolioItem | null)[]>([null]);
   const [mobilePreviewOpen, setMobilePreviewOpen] = useState(false);
@@ -71,7 +73,7 @@ export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOp
       newSelections[level] = item;
 
       // Auto-select "about.txt" when clicking a company folder
-      if (item.id.startsWith('company-') && item.children?.length) {
+      if (item.id.startsWith('company-') && item.children?.length && !isMobile) {
         const aboutFile = item.children.find((child) => child.name === 'about.txt');
         if (aboutFile) {
           newSelections[level + 1] = aboutFile;
@@ -82,10 +84,10 @@ export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOp
     });
 
     // On mobile, open preview fullscreen when selecting a file with content
-    if (item.content && typeof window !== 'undefined' && window.innerWidth <= 768) {
+    if (item.content && isMobile) {
       setMobilePreviewOpen(true);
     }
-  }, []);
+  }, [isMobile]);
 
   // Navigate via breadcrumb
   const handleBreadcrumbClick = useCallback((index: number) => {

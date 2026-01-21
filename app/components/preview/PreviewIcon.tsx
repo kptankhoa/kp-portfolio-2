@@ -33,8 +33,6 @@ export function PreviewIcon({ type, customIcon }: PreviewIconProps) {
   switch (type) {
   case 'app':
     return <AppsIcon sx={iconStyle} />;
-  case 'link':
-    return <LinkIcon sx={iconStyle} />;
   case 'image':
     return <ImageIcon sx={iconStyle} />;
   default:

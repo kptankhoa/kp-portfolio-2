@@ -88,6 +88,9 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
             inset: 0;
             z-index: 10;
             padding: 8px;
+            width: 100%;
+            min-width: unset;
+            flex: unset;
           }
 
           .preview-pane.mobile-fullscreen {
@@ -96,6 +99,7 @@ export function PreviewPane({ item, isMobileFullscreen, onMobileBack }: PreviewP
 
           .preview-scroll-wrapper {
             border-radius: 4px;
+            align-items: center;
           }
 
           .mobile-header {
