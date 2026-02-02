@@ -2,9 +2,8 @@
 
 import { useEffect, useRef, RefObject, useCallback, useState } from 'react';
 
-export function useAutoScroll<T extends HTMLElement>(dependencies: unknown[], enabled: boolean): RefObject<T | null> {
+export function useAutoScrollToEnd<T extends HTMLElement>(dependencies: unknown[], enabled: boolean, callback?: () => void): RefObject<T | null> {
   const ref = useRef<T>(null);
-  const [dependencyLength, setDependencyLength] = useState(dependencies.length);
   const scrollRefToEnd = useCallback(() => {
     if (!ref.current) return;
     const container = ref.current;

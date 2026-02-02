@@ -1,4 +1,5 @@
 export { useFinderNavigation } from './useFinderNavigation';
 export { useKeyboardNavigation } from './useKeyboardNavigation';
-export { useAutoScroll } from './useAutoScroll';
+export { useAutoScrollToEnd } from './useAutoScrollToEnd';
+export { useAutoScrollBack } from './useAutoScrollBack';
 export { useIsMobile } from './useIsMobile';

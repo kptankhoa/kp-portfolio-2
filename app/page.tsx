@@ -1,9 +1,9 @@
 'use client';
 
-import { Suspense, useRef } from 'react';
+import { Suspense } from 'react';
 import { Header, FinderColumn, PreviewPane } from './components';
 import { portfolioData, summaryData } from './data';
-import { useFinderNavigation, useKeyboardNavigation, useAutoScroll } from './hooks';
+import { useFinderNavigation, useKeyboardNavigation, useAutoScrollToEnd } from './hooks';
 
 function HomeContent() {
   const {
@@ -15,13 +15,12 @@ function HomeContent() {
     handleSelect,
     handleBreadcrumbClick,
     handleGoBack,
-    handleMobileBack,
   } = useFinderNavigation({ data: portfolioData, defaultPath: 'about-me' });
 
   useKeyboardNavigation({ onEscape: handleGoBack });
 
-  const contentContainerRef = useAutoScroll<HTMLDivElement>(selections, !!previewItem);
-  const columnsContainerRef = useAutoScroll<HTMLDivElement>(selections, !previewItem);
+  const contentContainerRef = useAutoScrollToEnd<HTMLDivElement>(selections, !!previewItem);
+  const columnsContainerRef = useAutoScrollToEnd<HTMLDivElement>(selections, !previewItem);
 
   return (
     <>

@@ -48,11 +48,11 @@ PostgreSQL for database and Knex as ORM. OpenAPI for endpoint documentation.`,
 
 const telegramChatbotProject: PortfolioItem = {
   id: 'telegram-chatbot',
-  name: 'Telegram Chatbot (2023)',
+  name: 'ChatGPT Telegram Bot (2023)',
   type: 'app',
   icon: 'telegram',
   content: {
-    title: 'Telegram Chatbot',
+    title: 'ChatGPT Telegram Chatbot',
     subtitle: 'A Telegram chatbot using ChatGPT to generate responses',
     description: `A Telegram chatbot powered by ChatGPT with multiple customizable characters stored in Firestore, chat history, remote configuration via Firebase, image generation with Bing Image Creator, article summarization, weather forecasts, and context dictionary features. Designed the code structure, data architecture, and prompts.`,
     tagSections: [
@@ -89,11 +89,34 @@ const kpotifyProject: PortfolioItem = {
   },
 };
 
+const unniqloDiscountDetectBotProject: PortfolioItem = {
+  id: 'unniqlo-discount-detect-bot',
+  name: 'Uniqlo Discount Detect Bot (2026)',
+  type: 'app',
+  icon: 'fashion',
+  content: {
+    title: 'Uniqlo Discount Detect Bot',
+    subtitle: 'Telegram chatbot to track discounts on Uniqlo products',
+    description: `A Telegram chatbot to track discounts on Uniqlo products, or when out-of-stock products are restocked.`,
+    tagSections: [
+      {
+        title: 'Technologies',
+        tags: ['Go', 'Telegram Bot API', 'Firestore'],
+      },
+    ],
+    links: [
+      { label: 'Telegram Bot', url: 'https://t.me/discount_detect_bot', icon: 'telegram' },
+      { label: 'GitHub', url: 'https://github.com/kptankhoa/discount-detect', icon: 'github' },
+    ],
+  },
+};
+
 export const projectsFolder: PortfolioItem = {
   id: 'projects',
   name: 'projects',
   type: 'folder',
   children: [
+    unniqloDiscountDetectBotProject,
     telegramChatbotProject,
     jobProject,
     chatProject,

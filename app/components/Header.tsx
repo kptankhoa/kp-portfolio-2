@@ -1,9 +1,8 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { PortfolioItem } from '../data';
-import { useAutoScroll } from '../hooks';
+import { useAutoScrollToEnd } from '../hooks';
 
 interface HeaderProps {
   firstName: string;
@@ -13,7 +12,7 @@ interface HeaderProps {
 }
 
 export function Header({ firstName, lastName, selections, onBreadcrumbClick }: HeaderProps) {
-  const breadcrumbsRef = useAutoScroll<HTMLDivElement>(selections, true);
+  const breadcrumbsRef = useAutoScrollToEnd<HTMLDivElement>(selections, true);
 
   // Build breadcrumb path
   const breadcrumbs = selections.filter(Boolean) as PortfolioItem[];
