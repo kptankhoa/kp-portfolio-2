@@ -134,6 +134,14 @@ export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOp
     setMobilePreviewOpen(false);
   }, []);
 
+  // Jump to an arbitrary path (used by the terminal)
+  const navigateToPath = useCallback((path: string) => {
+    setSelections(selectionsFromPath(path, data));
+    if (!path) {
+      setMobilePreviewOpen(false);
+    }
+  }, [data]);
+
   // Build columns based on selections
   const columns: { items: PortfolioItem[]; selectedId: string | null }[] = [
     { items: data, selectedId: selections[0]?.id || null },
@@ -163,5 +171,6 @@ export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOp
     handleBreadcrumbClick,
     handleGoBack,
     handleMobileBack,
+    navigateToPath,
   };
 }

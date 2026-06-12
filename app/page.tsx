@@ -2,8 +2,9 @@
 
 import { Suspense } from 'react';
 import { Header, FinderColumn, PreviewPane } from './components';
-import { portfolioData, summaryData } from './data';
-import { useFinderNavigation, useKeyboardNavigation, useAutoScrollToEnd } from './hooks';
+import { summaryData } from './data';
+import { useKeyboardNavigation, useAutoScrollToEnd } from './hooks';
+import { FinderProvider, useFinder } from './context/FinderContext';
 
 function HomeContent() {
   const {
@@ -15,7 +16,7 @@ function HomeContent() {
     handleSelect,
     handleBreadcrumbClick,
     handleGoBack,
-  } = useFinderNavigation({ data: portfolioData, defaultPath: 'about-me' });
+  } = useFinder();
 
   useKeyboardNavigation({ onEscape: handleGoBack });
 
@@ -58,7 +59,9 @@ export default function Home() {
     <div className="wrapper">
       <main className="main">
         <Suspense fallback={null}>
-          <HomeContent />
+          <FinderProvider>
+            <HomeContent />
+          </FinderProvider>
         </Suspense>
       </main>
 
