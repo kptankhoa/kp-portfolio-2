@@ -26,7 +26,7 @@ function createIcon(paths: string[]) {
         className={className}
         aria-hidden="true"
       >
-        {paths.map((d) => <path key={d} d={d} />)}
+        {paths.map((d, i) => <path key={i} d={d} />)}
       </svg>
     );
   };
