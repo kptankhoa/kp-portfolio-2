@@ -1,13 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
   FolderIcon,
   FolderOpenIcon,
   InsertDriveFileIcon,
   AppsIcon,
   ImageIcon,
+  ChevronRightIcon,
   itemIconMap,
 } from './icons';
 import { PortfolioItem } from '../data';

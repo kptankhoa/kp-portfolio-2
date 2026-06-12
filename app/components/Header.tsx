@@ -1,6 +1,6 @@
 'use client';
 
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { ChevronRightIcon } from './icons';
 import { PortfolioItem } from '../data';
 import { useAutoScrollToEnd } from '../hooks';
 
