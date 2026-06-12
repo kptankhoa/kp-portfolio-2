@@ -1,12 +1,12 @@
 'use client';
 
 import { Suspense } from 'react';
-import { Header, FinderColumn, PreviewPane } from './components';
+import { Header, FinderColumn, PreviewPane, MenuBar } from './components';
 import { summaryData } from './data';
-import { useKeyboardNavigation, useAutoScrollToEnd } from './hooks';
 import { FinderProvider, useFinder } from './context/FinderContext';
+import { useKeyboardNavigation, useAutoScrollToEnd } from './hooks';
 
-function HomeContent() {
+function Shell() {
   const {
     selections,
     columns,
@@ -24,55 +24,53 @@ function HomeContent() {
   const columnsContainerRef = useAutoScrollToEnd<HTMLDivElement>(selections, !previewItem);
 
   return (
-    <>
-      <Header
-        firstName={summaryData.firstName}
-        lastName={summaryData.lastName}
-        selections={selections}
-        onBreadcrumbClick={handleBreadcrumbClick}
-      />
-
-      <div className={`content ${mobilePreviewOpen ? 'preview-open' : ''}`} ref={contentContainerRef}>
-        <div className="columns-container" ref={columnsContainerRef}>
-          {columns.map((column, index) => (
-            <FinderColumn
-              key={index}
-              items={column.items}
-              selectedId={column.selectedId}
-              openIds={openIds}
-              onSelect={(item) => handleSelect(item, index)}
-            />
-          ))}
-        </div>
-        <PreviewPane
-          item={previewItem}
-          isMobileFullscreen={mobilePreviewOpen}
-          onMobileBack={handleGoBack}
-        />
-      </div>
-    </>
-  );
-}
-
-export default function Home() {
-  return (
     <div className="wrapper">
-      <main className="main">
-        <Suspense fallback={null}>
-          <FinderProvider>
-            <HomeContent />
-          </FinderProvider>
-        </Suspense>
-      </main>
+      <MenuBar firstName={summaryData.firstName} lastName={summaryData.lastName} />
+
+      <div className="window-area">
+        <main className="main">
+          <Header
+            selections={selections}
+            onBreadcrumbClick={handleBreadcrumbClick}
+          />
+
+          <div className={`content ${mobilePreviewOpen ? 'preview-open' : ''}`} ref={contentContainerRef}>
+            <div className="columns-container" ref={columnsContainerRef}>
+              {columns.map((column, index) => (
+                <FinderColumn
+                  key={index}
+                  items={column.items}
+                  selectedId={column.selectedId}
+                  openIds={openIds}
+                  onSelect={(item) => handleSelect(item, index)}
+                />
+              ))}
+            </div>
+            <PreviewPane
+              item={previewItem}
+              isMobileFullscreen={mobilePreviewOpen}
+              onMobileBack={handleGoBack}
+            />
+          </div>
+        </main>
+      </div>
 
       <style jsx>{`
         .wrapper {
           display: flex;
+          flex-direction: column;
+          height: 100vh;
+          height: 100dvh;
+          background: var(--bg-primary);
+        }
+
+        .window-area {
+          flex: 1;
+          display: flex;
           justify-content: center;
           align-items: center;
-          min-height: 100vh;
-          padding: 40px;
-          background: var(--bg-primary);
+          padding: 32px;
+          min-height: 0;
         }
 
         .main {
@@ -81,27 +79,28 @@ export default function Home() {
           display: flex;
           flex-direction: column;
           width: 100%;
-          height: calc(100vh - 80px);
+          height: 100%;
           max-width: 1400px;
           max-height: 800px;
           background: var(--bg-secondary);
           border: 1px solid var(--border-color);
           border-radius: 12px;
           overflow: hidden;
+          box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
         }
 
-        /* Tablet and below - full height */
+        /* Tablet and below - full size window */
         @media (max-width: 1024px) {
-          .wrapper {
+          .window-area {
             padding: 0;
           }
 
           .main {
-            height: 100vh;
             max-height: none;
             max-width: none;
-            border-radius: 0;
             border: none;
+            border-radius: 0;
+            box-shadow: none;
           }
         }
       `}</style>
@@ -140,5 +139,15 @@ export default function Home() {
         }
       `}</style>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={null}>
+      <FinderProvider>
+        <Shell />
+      </FinderProvider>
+    </Suspense>
   );
 }
