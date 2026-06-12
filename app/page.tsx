@@ -33,7 +33,7 @@ function Shell() {
       <div className="window-area">
         <main
           className={`main ${wiggle ? 'wiggle' : ''}`}
-          onAnimationEnd={() => setWiggle(false)}
+          onAnimationEnd={(e) => e.target === e.currentTarget && setWiggle(false)}
         >
           <TitleBar
             selections={selections}
