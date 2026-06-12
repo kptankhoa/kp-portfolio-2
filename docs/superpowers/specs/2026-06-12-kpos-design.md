@@ -99,7 +99,22 @@ handlers). Both the finder UI and the terminal consume it, so terminal
 commands move the real UI. Terminal open/closed state lives in the same
 provider (menu bar, finder item, and terminal window all touch it).
 
-## 4. Code health (shipped alongside)
+## 4. Retro cursor
+
+The pointer itself goes retro, matching the classic-OS concept.
+
+- **Site-wide pixel cursors:** custom CSS cursors (`cursor: url(...)`) drawn
+  as pixel-art in the classic System-7 style — black arrow with white
+  outline, crisp/aliased. Two variants: default arrow, and a pointing-hand
+  for clickable elements (finder items, breadcrumbs, buttons, links).
+  Shipped as small static assets in `public/` with sensible fallbacks
+  (`cursor: url(...) x y, auto` / `, pointer`).
+- **Terminal caret:** the terminal input uses a blinking block cursor (█)
+  instead of the native caret, like a real vintage shell.
+- Touch devices are unaffected (no cursor), so mobile needs no special
+  handling.
+
+## 5. Code health (shipped alongside)
 
 - **Build script:** `next build && next export` → `next build`. `next export`
   no longer exists in Next 16; the config already has `output: 'export'`.
