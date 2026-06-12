@@ -148,8 +148,10 @@ function ItemIcon({ type, customIcon, isOpen }: ItemIconProps) {
   if (type === 'folder') {
     if (customIcon && itemIconMap[customIcon]) {
       const CustomIcon = itemIconMap[customIcon];
+      
       return <CustomIcon sx={folderStyle} />;
     }
+    
     return isOpen
       ? <FolderOpenIcon sx={folderStyle} />
       : <FolderIcon sx={folderStyle} />;

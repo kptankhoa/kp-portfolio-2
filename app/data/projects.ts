@@ -54,7 +54,7 @@ const telegramChatbotProject: PortfolioItem = {
   content: {
     title: 'ChatGPT Telegram Chatbot',
     subtitle: 'A Telegram chatbot using ChatGPT to generate responses',
-    description: `A Telegram chatbot powered by ChatGPT with multiple customizable characters stored in Firestore, chat history, remote configuration via Firebase, image generation with Bing Image Creator, article summarization, weather forecasts, and context dictionary features. Designed the code structure, data architecture, and prompts.`,
+    description: 'A Telegram chatbot powered by ChatGPT with multiple customizable characters stored in Firestore, chat history, remote configuration via Firebase, image generation with Bing Image Creator, article summarization, weather forecasts, and context dictionary features. Designed the code structure, data architecture, and prompts.',
     tagSections: [
       {
         title: 'Technologies',
@@ -75,7 +75,7 @@ const kpotifyProject: PortfolioItem = {
   content: {
     title: 'Kpotify',
     subtitle: 'Spotify playlist and playback viewer built with React',
-    description: `A frontend React application that integrates with Spotify API to fetch and display users' playlist data and song playback information.`,
+    description: 'A frontend React application that integrates with Spotify API to fetch and display users\' playlist data and song playback information.',
     tagSections: [
       {
         title: 'Technologies',
@@ -97,7 +97,7 @@ const unniqloDiscountDetectBotProject: PortfolioItem = {
   content: {
     title: 'Uniqlo Discount Detect Bot',
     subtitle: 'Telegram chatbot to track discounts on Uniqlo products',
-    description: `A Telegram chatbot to track discounts on Uniqlo products, or when out-of-stock products are restocked.`,
+    description: 'A Telegram chatbot to track discounts on Uniqlo products, or when out-of-stock products are restocked.',
     tagSections: [
       {
         title: 'Technologies',

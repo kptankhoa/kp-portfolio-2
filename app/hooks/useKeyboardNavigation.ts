@@ -15,6 +15,7 @@ export function useKeyboardNavigation({ onEscape }: UseKeyboardNavigationOptions
     };
 
     window.addEventListener('keydown', handleKeyDown);
+    
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onEscape]);
 }

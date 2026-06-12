@@ -1,5 +1,8 @@
 'use client';
 
+/* eslint-disable react-hooks/set-state-in-effect -- state intentionally syncs from
+   external systems here: URL search params on mount, viewport size on resize */
+
 import { useState, useCallback, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { PortfolioItem } from '../data';
@@ -121,6 +124,7 @@ export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOp
       if (prev.length <= 1) {
         return [null];
       }
+      
       return prev.slice(0, -1);
     });
   }, [mobilePreviewOpen]);
