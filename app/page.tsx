@@ -1,7 +1,7 @@
 'use client';
 
-import { Suspense } from 'react';
-import { Header, FinderColumn, PreviewPane, MenuBar } from './components';
+import { Suspense, useState } from 'react';
+import { Header, FinderColumn, PreviewPane, MenuBar, TitleBar } from './components';
 import { summaryData } from './data';
 import { FinderProvider, useFinder } from './context/FinderContext';
 import { useKeyboardNavigation, useAutoScrollToEnd } from './hooks';
@@ -23,12 +23,23 @@ function Shell() {
   const contentContainerRef = useAutoScrollToEnd<HTMLDivElement>(selections, !!previewItem);
   const columnsContainerRef = useAutoScrollToEnd<HTMLDivElement>(selections, !previewItem);
 
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [wiggle, setWiggle] = useState(false);
+
   return (
-    <div className="wrapper">
+    <div className={`wrapper ${isFullscreen ? 'fullscreen' : ''}`}>
       <MenuBar firstName={summaryData.firstName} lastName={summaryData.lastName} />
 
       <div className="window-area">
-        <main className="main">
+        <main
+          className={`main ${wiggle ? 'wiggle' : ''}`}
+          onAnimationEnd={() => setWiggle(false)}
+        >
+          <TitleBar
+            selections={selections}
+            onFullscreen={() => setIsFullscreen((f) => !f)}
+            onMinimize={() => setWiggle(true)}
+          />
           <Header
             selections={selections}
             onBreadcrumbClick={handleBreadcrumbClick}
@@ -87,6 +98,33 @@ function Shell() {
           border-radius: 12px;
           overflow: hidden;
           box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
+          transition: max-width 0.25s ease, max-height 0.25s ease, border-radius 0.25s ease;
+        }
+
+        .wrapper.fullscreen .window-area {
+          padding: 0;
+        }
+
+        .wrapper.fullscreen .main {
+          max-width: none;
+          max-height: none;
+          border-radius: 0;
+        }
+
+        .main.wiggle {
+          animation: window-wiggle 0.4s ease;
+        }
+
+        @keyframes window-wiggle {
+          0%, 100% {
+            transform: translateY(0) scale(1);
+          }
+          30% {
+            transform: translateY(10px) scale(0.98);
+          }
+          65% {
+            transform: translateY(4px) scale(0.995);
+          }
         }
 
         /* Tablet and below - full size window */
