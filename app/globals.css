@@ -94,3 +94,17 @@ body::before {
   background: var(--gruvbox-yellow);
   color: var(--bg-primary);
 }
+
+/* Retro pixel cursors. Hotspots: arrow tip (3,1), finger tip (10,2). */
+html,
+body {
+  cursor: url('/cursors/arrow.svg') 3 1, default;
+}
+
+button,
+a,
+[role='button'],
+label,
+select {
+  cursor: url('/cursors/pointer.svg') 10 2, pointer !important;
+}
