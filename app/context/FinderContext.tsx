@@ -38,6 +38,9 @@ export function FinderProvider({ children }: { children: ReactNode }) {
     nav.handleSelect(item, level);
   }, [nav]);
 
+  // Note: the value object (and `nav` itself) is rebuilt every render, so
+  // wrapping it in useMemo would be ineffective without first stabilizing the
+  // hook's return value. Consumers re-render with provider state anyway.
   return (
     <FinderContext.Provider
       value={{
