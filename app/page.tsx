@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense, useState } from 'react';
-import { Header, FinderColumn, PreviewPane, MenuBar, TitleBar } from './components';
+import { Header, FinderColumn, PreviewPane, MenuBar, TitleBar, TerminalWindow } from './components';
 import { summaryData } from './data';
 import { FinderProvider, useFinder } from './context/FinderContext';
 import { useKeyboardNavigation, useAutoScrollToEnd } from './hooks';
@@ -65,6 +65,8 @@ function Shell() {
           </div>
         </main>
       </div>
+
+      <TerminalWindow />
 
       <style jsx>{`
         .wrapper {

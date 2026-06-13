@@ -7,9 +7,17 @@ import { aboutMeFolder } from './about-me';
 import { experienceFolder } from './experience';
 import { imagesFolder } from './images';
 
+const terminalApp: PortfolioItem = {
+  id: 'terminal',
+  name: 'terminal.app',
+  type: 'app',
+  icon: 'terminal',
+};
+
 export const portfolioData: PortfolioItem[] = [
   aboutMeFolder,
   experienceFolder,
   projectsFolder,
   imagesFolder,
+  terminalApp,
 ];
