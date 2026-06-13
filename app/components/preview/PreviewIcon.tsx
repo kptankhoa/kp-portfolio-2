@@ -4,7 +4,6 @@ import {
   FolderIcon,
   InsertDriveFileIcon,
   AppsIcon,
-  LinkIcon,
   ImageIcon,
   itemIconMap,
 } from '../icons';

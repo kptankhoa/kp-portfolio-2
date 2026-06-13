@@ -129,11 +129,6 @@ export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOp
     });
   }, [mobilePreviewOpen]);
 
-  // Close mobile preview
-  const handleMobileBack = useCallback(() => {
-    setMobilePreviewOpen(false);
-  }, []);
-
   // Jump to an arbitrary path (used by the terminal)
   const navigateToPath = useCallback((path: string) => {
     setSelections(selectionsFromPath(path, data));
@@ -170,7 +165,6 @@ export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOp
     handleSelect,
     handleBreadcrumbClick,
     handleGoBack,
-    handleMobileBack,
     navigateToPath,
   };
 }

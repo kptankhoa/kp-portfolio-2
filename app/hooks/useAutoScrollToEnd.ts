@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useRef, RefObject, useCallback, useState } from 'react';
+import { useEffect, useRef, RefObject, useCallback } from 'react';
 
-export function useAutoScrollToEnd<T extends HTMLElement>(dependencies: unknown[], enabled: boolean, callback?: () => void): RefObject<T | null> {
+export function useAutoScrollToEnd<T extends HTMLElement>(dependencies: unknown[], enabled: boolean): RefObject<T | null> {
   const ref = useRef<T>(null);
   const scrollRefToEnd = useCallback(() => {
     if (!ref.current) return;
