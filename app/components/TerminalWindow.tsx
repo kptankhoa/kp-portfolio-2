@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { portfolioData } from '../data';
 import { useFinder } from '../context/FinderContext';
-import { runCommand } from '../terminal/engine';
+import { runCommand, complete } from '../terminal/engine';
 import { useIsMobile } from '../hooks';
 
 interface TermLine {
@@ -114,6 +114,17 @@ export function TerminalWindow() {
         setHistoryIndex(idx);
         setInput(history[idx]);
       }
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      const result = complete(input, cwd, portfolioData);
+      if (result.suggestions) {
+        setLines((prev) => [
+          ...prev,
+          { text: `${prompt} ${input}`, kind: 'input' },
+          ...result.suggestions!.map((text) => ({ text, kind: 'output' as const })),
+        ]);
+      }
+      setInput(result.input);
     }
   };
 
