@@ -140,7 +140,9 @@ export function runCommand(
     if ('error' in res) {
       return { output: [`cd: ${res.error}`] };
     }
-    if (res.path.length > 0 && !nodeAt(res.path, data)?.children?.length) {
+    // A folder is identified by having a children array (even if empty),
+    // not by being non-empty — so an empty folder is still a valid cd target.
+    if (res.path.length > 0 && !nodeAt(res.path, data)?.children) {
       return { output: [`cd: ${arg}: not a directory`] };
     }
 
