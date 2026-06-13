@@ -7,9 +7,21 @@ interface TitleBarProps {
   selections: (PortfolioItem | null)[];
   onFullscreen: () => void;
   onMinimize: () => void;
+  draggable?: boolean;
+  onPointerDown?: (e: React.PointerEvent) => void;
+  onPointerMove?: (e: React.PointerEvent) => void;
+  onPointerUp?: (e: React.PointerEvent) => void;
 }
 
-export function TitleBar({ selections, onFullscreen, onMinimize }: TitleBarProps) {
+export function TitleBar({
+  selections,
+  onFullscreen,
+  onMinimize,
+  draggable = false,
+  onPointerDown,
+  onPointerMove,
+  onPointerUp,
+}: TitleBarProps) {
   const [showNiceTry, setShowNiceTry] = useState(false);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -27,8 +39,13 @@ export function TitleBar({ selections, onFullscreen, onMinimize }: TitleBarProps
   };
 
   return (
-    <div className="title-bar">
-      <div className="traffic-lights">
+    <div
+      className={`title-bar ${draggable ? 'draggable' : ''}`}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+    >
+      <div className="traffic-lights" onPointerDown={(e) => e.stopPropagation()}>
         <button className="light red" onClick={handleClose} aria-label="Close window" />
         <button className="light yellow" onClick={onMinimize} aria-label="Minimize window" />
         <button className="light green" onClick={onFullscreen} aria-label="Toggle fullscreen" />
@@ -49,6 +66,15 @@ export function TitleBar({ selections, onFullscreen, onMinimize }: TitleBarProps
           border-bottom: 1px solid var(--border-color);
           flex-shrink: 0;
           user-select: none;
+        }
+
+        .title-bar.draggable {
+          cursor: grab;
+          touch-action: none;
+        }
+
+        .title-bar.draggable:active {
+          cursor: grabbing;
         }
 
         .traffic-lights {

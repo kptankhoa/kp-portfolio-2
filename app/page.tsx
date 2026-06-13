@@ -1,10 +1,10 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { Suspense, useRef, useState } from 'react';
 import { Header, FinderColumn, PreviewPane, MenuBar, TitleBar, TerminalWindow } from './components';
 import { summaryData } from './data';
 import { FinderProvider, useFinder } from './context/FinderContext';
-import { useKeyboardNavigation, useAutoScrollToEnd } from './hooks';
+import { useKeyboardNavigation, useAutoScrollToEnd, useIsMobile } from './hooks';
 
 function Shell() {
   const {
@@ -25,6 +25,40 @@ function Shell() {
 
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [wiggle, setWiggle] = useState(false);
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+
+  // The window can only be dragged when it's floating — not when it fills the
+  // viewport (fullscreen) or on compact screens where it's edge-to-edge.
+  const isCompact = useIsMobile(1024);
+  const draggable = !isFullscreen && !isCompact;
+  const drag = useRef<{ startX: number; startY: number; baseX: number; baseY: number } | null>(null);
+
+  const onWindowPointerDown = (e: React.PointerEvent) => {
+    if (!draggable) {
+      return;
+    }
+    e.currentTarget.setPointerCapture(e.pointerId);
+    drag.current = { startX: e.clientX, startY: e.clientY, baseX: pos.x, baseY: pos.y };
+  };
+
+  const onWindowPointerMove = (e: React.PointerEvent) => {
+    if (!drag.current) {
+      return;
+    }
+    setPos({
+      x: drag.current.baseX + e.clientX - drag.current.startX,
+      y: drag.current.baseY + e.clientY - drag.current.startY,
+    });
+  };
+
+  const onWindowPointerUp = () => {
+    drag.current = null;
+  };
+
+  const toggleFullscreen = () => {
+    setIsFullscreen((f) => !f);
+    setPos({ x: 0, y: 0 });
+  };
 
   return (
     <div className={`wrapper ${isFullscreen ? 'fullscreen' : ''}`}>
@@ -33,12 +67,17 @@ function Shell() {
       <div className="window-area">
         <main
           className={`main ${wiggle ? 'wiggle' : ''}`}
+          style={draggable ? { transform: `translate(${pos.x}px, ${pos.y}px)` } : undefined}
           onAnimationEnd={(e) => e.target === e.currentTarget && setWiggle(false)}
         >
           <TitleBar
             selections={selections}
-            onFullscreen={() => setIsFullscreen((f) => !f)}
+            onFullscreen={toggleFullscreen}
             onMinimize={() => setWiggle(true)}
+            draggable={draggable}
+            onPointerDown={onWindowPointerDown}
+            onPointerMove={onWindowPointerMove}
+            onPointerUp={onWindowPointerUp}
           />
           <Header
             selections={selections}
