@@ -50,6 +50,14 @@ export function TerminalWindow() {
 
   const prompt = `guest@kpos ~${cwd.length ? '/' + cwd.join('/') : ''} $`;
 
+  // Reset window chrome so the terminal always reopens centered and restored.
+  // The command session (lines, cwd, history) is intentionally preserved.
+  const handleClose = () => {
+    setMaximized(false);
+    setPos({ x: 0, y: 0 });
+    closeTerminal();
+  };
+
   const submit = () => {
     const result = runCommand(input, cwd, portfolioData);
     const echoed: TermLine = { text: `${prompt} ${input}`, kind: 'input' };
@@ -78,7 +86,7 @@ export function TerminalWindow() {
       window.open(result.openUrl, '_blank', 'noopener,noreferrer');
     }
     if (result.closeTerminal) {
-      closeTerminal();
+      handleClose();
     }
   };
 
@@ -144,8 +152,12 @@ export function TerminalWindow() {
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
       >
-        <div className="term-lights" onPointerDown={(e) => e.stopPropagation()}>
-          <button className="light red" onClick={closeTerminal} aria-label="Close terminal" />
+        <div
+          className="term-lights"
+          onPointerDown={(e) => e.stopPropagation()}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button className="light red" onClick={handleClose} aria-label="Close terminal" />
           <button className="light yellow" onClick={() => setWiggle(true)} aria-label="Minimize terminal" />
           <button
             className="light green"
@@ -157,7 +169,7 @@ export function TerminalWindow() {
           />
         </div>
         <span className="term-title">terminal — kpsh</span>
-        <button className="term-close-mobile" onClick={closeTerminal} aria-label="Close terminal">
+        <button className="term-close-mobile" onClick={handleClose} aria-label="Close terminal">
           ✕
         </button>
       </div>
