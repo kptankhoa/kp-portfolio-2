@@ -69,12 +69,12 @@ export function TitleBar({
         }
 
         .title-bar.draggable {
-          cursor: grab;
+          cursor: url('/cursors/grab.svg') 13 15, grab;
           touch-action: none;
         }
 
         .title-bar.draggable:active {
-          cursor: grabbing;
+          cursor: url('/cursors/grabbing.svg') 13 15, grabbing;
         }
 
         .traffic-lights {

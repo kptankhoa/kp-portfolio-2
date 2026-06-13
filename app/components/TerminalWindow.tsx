@@ -251,10 +251,14 @@ export function TerminalWindow() {
           padding: 8px 12px;
           background: var(--bg-tertiary);
           border-bottom: 1px solid var(--border-color);
-          cursor: grab;
+          cursor: url('/cursors/grab.svg') 13 15, grab;
           user-select: none;
           touch-action: none;
           flex-shrink: 0;
+        }
+
+        .term-title-bar:active {
+          cursor: url('/cursors/grabbing.svg') 13 15, grabbing;
         }
 
         .term-lights {
