@@ -11,6 +11,7 @@ interface TitleBarProps {
   onPointerDown?: (e: React.PointerEvent) => void;
   onPointerMove?: (e: React.PointerEvent) => void;
   onPointerUp?: (e: React.PointerEvent) => void;
+  onDoubleClick?: () => void;
 }
 
 export function TitleBar({
@@ -21,6 +22,7 @@ export function TitleBar({
   onPointerDown,
   onPointerMove,
   onPointerUp,
+  onDoubleClick,
 }: TitleBarProps) {
   const [showNiceTry, setShowNiceTry] = useState(false);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -44,8 +46,13 @@ export function TitleBar({
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
+      onDoubleClick={onDoubleClick}
     >
-      <div className="traffic-lights" onPointerDown={(e) => e.stopPropagation()}>
+      <div
+        className="traffic-lights"
+        onPointerDown={(e) => e.stopPropagation()}
+        onDoubleClick={(e) => e.stopPropagation()}
+      >
         <button className="light red" onClick={handleClose} aria-label="Close window" />
         <button className="light yellow" onClick={onMinimize} aria-label="Minimize window" />
         <button className="light green" onClick={onFullscreen} aria-label="Toggle fullscreen" />

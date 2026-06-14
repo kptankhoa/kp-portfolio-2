@@ -197,6 +197,11 @@ export function TerminalWindow() {
     resize.current = null;
   };
 
+  const toggleMaximize = () => {
+    setMaximized((m) => !m);
+    setPos({ x: 0, y: 0 });
+  };
+
   const windowStyle: React.CSSProperties = floating
     ? {
       transform: `translate(${pos.x}px, ${pos.y}px)`,
@@ -219,20 +224,19 @@ export function TerminalWindow() {
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
+        onDoubleClick={toggleMaximize}
       >
         <div
           className="term-lights"
           onPointerDown={(e) => e.stopPropagation()}
           onClick={(e) => e.stopPropagation()}
+          onDoubleClick={(e) => e.stopPropagation()}
         >
           <button className="light red" onClick={handleClose} aria-label="Close terminal" />
           <button className="light yellow" onClick={() => setWiggle(true)} aria-label="Minimize terminal" />
           <button
             className="light green"
-            onClick={() => {
-              setMaximized((m) => !m);
-              setPos({ x: 0, y: 0 });
-            }}
+            onClick={toggleMaximize}
             aria-label="Maximize terminal"
           />
         </div>

@@ -136,6 +136,7 @@ function Shell() {
             onPointerDown={onWindowPointerDown}
             onPointerMove={onWindowPointerMove}
             onPointerUp={onWindowPointerUp}
+            onDoubleClick={toggleFullscreen}
           />
           <Header
             selections={selections}
