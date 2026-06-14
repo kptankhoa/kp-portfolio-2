@@ -27,7 +27,16 @@ export function TerminalWindow() {
   const [maximized, setMaximized] = useState(false);
   const [wiggle, setWiggle] = useState(false);
   const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [size, setSize] = useState({ w: 600, h: 420 });
   const drag = useRef<{ startX: number; startY: number; baseX: number; baseY: number } | null>(null);
+  const resize = useRef<{
+    startX: number;
+    startY: number;
+    baseW: number;
+    baseH: number;
+    basePosX: number;
+    basePosY: number;
+  } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
 
@@ -50,11 +59,14 @@ export function TerminalWindow() {
 
   const prompt = `guest@kpos ~${cwd.length ? '/' + cwd.join('/') : ''} $`;
 
+  const floating = !isMobile && !maximized;
+
   // Reset window chrome so the terminal always reopens centered and restored.
   // The command session (lines, cwd, history) is intentionally preserved.
   const handleClose = () => {
     setMaximized(false);
     setPos({ x: 0, y: 0 });
+    setSize({ w: 600, h: 420 });
     closeTerminal();
   };
 
@@ -129,7 +141,7 @@ export function TerminalWindow() {
   };
 
   const onPointerDown = (e: React.PointerEvent) => {
-    if (isMobile || maximized) {
+    if (!floating) {
       return;
     }
     e.currentTarget.setPointerCapture(e.pointerId);
@@ -150,10 +162,55 @@ export function TerminalWindow() {
     drag.current = null;
   };
 
+  const onResizePointerDown = (e: React.PointerEvent) => {
+    if (!floating) {
+      return;
+    }
+    e.stopPropagation();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    resize.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      baseW: size.w,
+      baseH: size.h,
+      basePosX: pos.x,
+      basePosY: pos.y,
+    };
+  };
+
+  const onResizePointerMove = (e: React.PointerEvent) => {
+    if (!resize.current) {
+      return;
+    }
+    const w = Math.max(320, Math.min(window.innerWidth - 16, resize.current.baseW + e.clientX - resize.current.startX));
+    const h = Math.max(200, Math.min(window.innerHeight - 32, resize.current.baseH + e.clientY - resize.current.startY));
+    setSize({ w, h });
+    // The window is centered (left/top 50% + negative margins), so growing by Δ
+    // shifts its top-left by -Δ/2; compensate so the corner tracks the cursor.
+    setPos({
+      x: resize.current.basePosX + (w - resize.current.baseW) / 2,
+      y: resize.current.basePosY + (h - resize.current.baseH) / 2,
+    });
+  };
+
+  const onResizePointerUp = () => {
+    resize.current = null;
+  };
+
+  const windowStyle: React.CSSProperties = floating
+    ? {
+      transform: `translate(${pos.x}px, ${pos.y}px)`,
+      width: size.w,
+      height: size.h,
+      marginLeft: -size.w / 2,
+      marginTop: -size.h / 2,
+    }
+    : {};
+
   return (
     <div
       className={`terminal-window ${maximized ? 'maximized' : ''} ${wiggle ? 'wiggle' : ''}`}
-      style={!isMobile && !maximized ? { transform: `translate(${pos.x}px, ${pos.y}px)` } : undefined}
+      style={windowStyle}
       onClick={() => inputRef.current?.focus()}
       onAnimationEnd={() => setWiggle(false)}
     >
@@ -208,6 +265,16 @@ export function TerminalWindow() {
           />
         </div>
       </div>
+
+      {floating && (
+        <div
+          className="term-resize-handle"
+          onPointerDown={onResizePointerDown}
+          onPointerMove={onResizePointerMove}
+          onPointerUp={onResizePointerUp}
+          aria-hidden="true"
+        />
+      )}
 
       <style jsx>{`
         .terminal-window {
@@ -319,6 +386,29 @@ export function TerminalWindow() {
           font-family: inherit;
           font-size: 16px;
           cursor: pointer;
+        }
+
+        .term-resize-handle {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          width: 18px;
+          height: 18px;
+          z-index: 110;
+          cursor: url('/cursors/resize.svg') 12 12, nwse-resize;
+          touch-action: none;
+        }
+
+        .term-resize-handle::after {
+          content: '';
+          position: absolute;
+          right: 3px;
+          bottom: 3px;
+          width: 7px;
+          height: 7px;
+          border-right: 2px solid var(--text-muted);
+          border-bottom: 2px solid var(--text-muted);
+          opacity: 0.5;
         }
 
         .term-body {

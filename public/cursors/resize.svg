@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" shape-rendering="crispEdges">
+  <g stroke="#fffef8" stroke-width="4" fill="#fffef8" stroke-linejoin="miter">
+    <path d="M6 6 L17 17"/>
+    <path d="M3 3 L3 10 L10 3 Z"/>
+    <path d="M21 21 L21 14 L14 21 Z"/>
+  </g>
+  <g stroke="#1d2021" stroke-width="2" fill="#1d2021" stroke-linejoin="miter">
+    <path d="M6 6 L17 17"/>
+    <path d="M3 3 L3 10 L10 3 Z"/>
+    <path d="M21 21 L21 14 L14 21 Z"/>
+  </g>
+</svg>

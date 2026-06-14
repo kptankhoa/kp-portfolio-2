@@ -26,15 +26,25 @@ function Shell() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [wiggle, setWiggle] = useState(false);
   const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [size, setSize] = useState<{ w: number; h: number } | null>(null);
 
-  // The window can only be dragged when it's floating — not when it fills the
-  // viewport (fullscreen) or on compact screens where it's edge-to-edge.
+  // The window can only be moved/resized when it's floating — not when it fills
+  // the viewport (fullscreen) or on compact screens where it's edge-to-edge.
   const isCompact = useIsMobile(1024);
-  const draggable = !isFullscreen && !isCompact;
+  const floating = !isFullscreen && !isCompact;
+  const mainRef = useRef<HTMLElement>(null);
   const drag = useRef<{ startX: number; startY: number; baseX: number; baseY: number } | null>(null);
+  const resize = useRef<{
+    startX: number;
+    startY: number;
+    baseW: number;
+    baseH: number;
+    basePosX: number;
+    basePosY: number;
+  } | null>(null);
 
   const onWindowPointerDown = (e: React.PointerEvent) => {
-    if (!draggable) {
+    if (!floating) {
       return;
     }
     e.currentTarget.setPointerCapture(e.pointerId);
@@ -55,10 +65,57 @@ function Shell() {
     drag.current = null;
   };
 
+  const onResizePointerDown = (e: React.PointerEvent) => {
+    if (!floating) {
+      return;
+    }
+    e.stopPropagation();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    const rect = mainRef.current?.getBoundingClientRect();
+    resize.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      baseW: size?.w ?? rect?.width ?? 0,
+      baseH: size?.h ?? rect?.height ?? 0,
+      basePosX: pos.x,
+      basePosY: pos.y,
+    };
+  };
+
+  const onResizePointerMove = (e: React.PointerEvent) => {
+    if (!resize.current) {
+      return;
+    }
+    const w = Math.max(360, Math.min(window.innerWidth - 16, resize.current.baseW + e.clientX - resize.current.startX));
+    const h = Math.max(280, Math.min(window.innerHeight - 32, resize.current.baseH + e.clientY - resize.current.startY));
+    setSize({ w, h });
+    // Window is centered, so growing by Δ moves its top-left by -Δ/2; shift the
+    // position by +Δ/2 to keep the top-left anchored and the corner under the cursor.
+    setPos({
+      x: resize.current.basePosX + (w - resize.current.baseW) / 2,
+      y: resize.current.basePosY + (h - resize.current.baseH) / 2,
+    });
+  };
+
+  const onResizePointerUp = () => {
+    resize.current = null;
+  };
+
   const toggleFullscreen = () => {
     setIsFullscreen((f) => !f);
     setPos({ x: 0, y: 0 });
   };
+
+  const mainStyle: React.CSSProperties = {};
+  if (floating) {
+    mainStyle.transform = `translate(${pos.x}px, ${pos.y}px)`;
+    if (size) {
+      mainStyle.width = size.w;
+      mainStyle.height = size.h;
+      mainStyle.maxWidth = 'none';
+      mainStyle.maxHeight = 'none';
+    }
+  }
 
   return (
     <div className={`wrapper ${isFullscreen ? 'fullscreen' : ''}`}>
@@ -66,15 +123,16 @@ function Shell() {
 
       <div className="window-area">
         <main
+          ref={mainRef}
           className={`main ${wiggle ? 'wiggle' : ''}`}
-          style={draggable ? { transform: `translate(${pos.x}px, ${pos.y}px)` } : undefined}
+          style={mainStyle}
           onAnimationEnd={(e) => e.target === e.currentTarget && setWiggle(false)}
         >
           <TitleBar
             selections={selections}
             onFullscreen={toggleFullscreen}
             onMinimize={() => setWiggle(true)}
-            draggable={draggable}
+            draggable={floating}
             onPointerDown={onWindowPointerDown}
             onPointerMove={onWindowPointerMove}
             onPointerUp={onWindowPointerUp}
@@ -102,6 +160,16 @@ function Shell() {
               onMobileBack={handleGoBack}
             />
           </div>
+
+          {floating && (
+            <div
+              className="resize-handle"
+              onPointerDown={onResizePointerDown}
+              onPointerMove={onResizePointerMove}
+              onPointerUp={onResizePointerUp}
+              aria-hidden="true"
+            />
+          )}
         </main>
       </div>
 
@@ -154,6 +222,29 @@ function Shell() {
 
         .main.wiggle {
           animation: window-wiggle 0.4s ease;
+        }
+
+        .resize-handle {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          width: 18px;
+          height: 18px;
+          z-index: 5;
+          cursor: url('/cursors/resize.svg') 12 12, nwse-resize;
+          touch-action: none;
+        }
+
+        .resize-handle::after {
+          content: '';
+          position: absolute;
+          right: 3px;
+          bottom: 3px;
+          width: 7px;
+          height: 7px;
+          border-right: 2px solid var(--text-muted);
+          border-bottom: 2px solid var(--text-muted);
+          opacity: 0.5;
         }
 
         @keyframes window-wiggle {
