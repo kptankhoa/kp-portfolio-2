@@ -1,6 +1,6 @@
 'use client';
 
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { ArrowBackIcon } from '../icons';
 import { PortfolioItem } from '../../data';
 import { PreviewEmpty } from './PreviewEmpty';
 import { PreviewEmbed } from './PreviewEmbed';

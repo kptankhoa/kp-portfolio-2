@@ -1,7 +1,6 @@
 'use client';
 
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import { linkIconMap } from '../icons';
+import { linkIconMap, OpenInNewIcon } from '../icons';
 import { PortfolioItem } from '../../data';
 import { PreviewIcon } from './PreviewIcon';
 

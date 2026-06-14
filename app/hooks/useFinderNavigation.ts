@@ -1,5 +1,8 @@
 'use client';
 
+/* eslint-disable react-hooks/set-state-in-effect -- state intentionally syncs from
+   external systems here: URL search params on mount, viewport size on resize */
+
 import { useState, useCallback, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { PortfolioItem } from '../data';
@@ -121,14 +124,18 @@ export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOp
       if (prev.length <= 1) {
         return [null];
       }
+      
       return prev.slice(0, -1);
     });
   }, [mobilePreviewOpen]);
 
-  // Close mobile preview
-  const handleMobileBack = useCallback(() => {
-    setMobilePreviewOpen(false);
-  }, []);
+  // Jump to an arbitrary path (used by the terminal)
+  const navigateToPath = useCallback((path: string) => {
+    setSelections(selectionsFromPath(path, data));
+    if (!path) {
+      setMobilePreviewOpen(false);
+    }
+  }, [data]);
 
   // Build columns based on selections
   const columns: { items: PortfolioItem[]; selectedId: string | null }[] = [
@@ -158,6 +165,6 @@ export function useFinderNavigation({ data, defaultPath }: UseFinderNavigationOp
     handleSelect,
     handleBreadcrumbClick,
     handleGoBack,
-    handleMobileBack,
+    navigateToPath,
   };
 }

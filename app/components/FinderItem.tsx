@@ -1,13 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
   FolderIcon,
   FolderOpenIcon,
   InsertDriveFileIcon,
   AppsIcon,
   ImageIcon,
+  ChevronRightIcon,
   itemIconMap,
 } from './icons';
 import { PortfolioItem } from '../data';
@@ -148,8 +148,10 @@ function ItemIcon({ type, customIcon, isOpen }: ItemIconProps) {
   if (type === 'folder') {
     if (customIcon && itemIconMap[customIcon]) {
       const CustomIcon = itemIconMap[customIcon];
+      
       return <CustomIcon sx={folderStyle} />;
     }
+    
     return isOpen
       ? <FolderOpenIcon sx={folderStyle} />
       : <FolderIcon sx={folderStyle} />;

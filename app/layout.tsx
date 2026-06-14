@@ -9,9 +9,12 @@ const cutive = Cutive_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'kptankhoa',
-  description: 'Khoa Phan Porfolio',
+  title: 'Khoa Phan — kptankhoa',
+  description: 'Khoa Phan, fullstack developer. A retro Finder-style portfolio.',
+  metadataBase: new URL('https://kptankhoa.dev'),
   openGraph: {
+    title: 'Khoa Phan — kptankhoa',
+    description: 'Khoa Phan, fullstack developer. A retro Finder-style portfolio.',
     images: 'https://bucket.kptankhoa.dev/bg.jpg',
   },
 };

@@ -4,7 +4,6 @@ import {
   FolderIcon,
   InsertDriveFileIcon,
   AppsIcon,
-  LinkIcon,
   ImageIcon,
   itemIconMap,
 } from '../icons';
@@ -26,6 +25,7 @@ export function PreviewIcon({ type, customIcon }: PreviewIconProps) {
   // Use custom icon if specified
   if (customIcon && itemIconMap[customIcon]) {
     const CustomIcon = itemIconMap[customIcon];
+    
     return <CustomIcon sx={iconStyle} />;
   }
 
