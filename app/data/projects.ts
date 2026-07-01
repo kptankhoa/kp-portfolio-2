@@ -119,7 +119,7 @@ const trainingLogProject: PortfolioItem = {
   content: {
     title: 'Training Log',
     subtitle: 'Personal fitness tracker with calendar view and training notes',
-    description: 'A mobile-friendly web app to track daily training sessions. Features a monthly calendar with color-coded training tags, a day log for notes and PRs, multi-note notepad with markdown support, and tag management. Built with SvelteKit and Firebase.',
+    description: 'A mobile-friendly web app to track daily training sessions. Features a monthly calendar with color-coded training tags, a day log for notes and PRs, multi-note notepad with markdown support, and tag management. Built with SvelteKit and Firebase. Developed collaboratively with Claude.',
     tagSections: [
       {
         title: 'Technologies',
