@@ -111,11 +111,34 @@ const unniqloDiscountDetectBotProject: PortfolioItem = {
   },
 };
 
+const trainingLogProject: PortfolioItem = {
+  id: 'training-log',
+  name: 'Training Log (2026)',
+  type: 'app',
+  icon: 'health',
+  content: {
+    title: 'Training Log',
+    subtitle: 'Personal fitness tracker with calendar view and training notes',
+    description: 'A mobile-friendly web app to track daily training sessions. Features a monthly calendar with color-coded training tags, a day log for notes and PRs, multi-note notepad with markdown support, and tag management. Built with SvelteKit and Firebase.',
+    tagSections: [
+      {
+        title: 'Technologies',
+        tags: ['SvelteKit', 'TypeScript', 'Firebase', 'Firestore', 'Tailwind CSS', 'Cloudflare Pages'],
+      },
+    ],
+    links: [
+      { label: 'View Live', url: 'https://training-log.pages.dev/', icon: 'website' },
+      { label: 'GitHub', url: 'https://github.com/kptankhoa/training-log', icon: 'github' },
+    ],
+  },
+};
+
 export const projectsFolder: PortfolioItem = {
   id: 'projects',
   name: 'projects',
   type: 'folder',
   children: [
+    trainingLogProject,
     unniqloDiscountDetectBotProject,
     telegramChatbotProject,
     jobProject,
