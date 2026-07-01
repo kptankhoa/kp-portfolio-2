@@ -127,7 +127,7 @@ const trainingLogProject: PortfolioItem = {
       },
     ],
     links: [
-      { label: 'View Live', url: 'https://training-log.pages.dev/', icon: 'website' },
+      { label: 'View Live', url: 'https://training.kptankhoa.dev/', icon: 'website' },
       { label: 'GitHub', url: 'https://github.com/kptankhoa/training-log', icon: 'github' },
     ],
   },
