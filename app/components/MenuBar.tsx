@@ -1,7 +1,11 @@
 'use client';
 
+/* eslint-disable react-hooks/set-state-in-effect -- state intentionally syncs from
+   the external theme applied to <html> by the no-flash script in layout.tsx */
+
 import { useEffect, useState } from 'react';
 import { useFinder } from '../context/FinderContext';
+import { LightModeIcon, DarkModeIcon } from './icons';
 
 interface MenuBarProps {
   firstName: string;
@@ -22,6 +26,8 @@ export function MenuBar({ firstName, lastName }: MenuBarProps) {
   // Clock renders only after mount: the page is statically exported, so any
   // server-rendered time would be stale and mismatch on hydration.
   const [now, setNow] = useState<Date | null>(null);
+  // Read after mount to match whatever the no-flash script in layout.tsx already applied.
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
   useEffect(() => {
     const tick = () => setNow(new Date());
@@ -34,6 +40,21 @@ export function MenuBar({ firstName, lastName }: MenuBarProps) {
     };
   }, []);
 
+  useEffect(() => {
+    setTheme(document.documentElement.dataset.theme === 'light' ? 'light' : 'dark');
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    if (next === 'light') {
+      document.documentElement.dataset.theme = 'light';
+    } else {
+      delete document.documentElement.dataset.theme;
+    }
+    localStorage.setItem('theme', next);
+  };
+
   const clock = now ? formatClock(now) : null;
 
   return (
@@ -45,6 +66,16 @@ export function MenuBar({ firstName, lastName }: MenuBarProps) {
         </span>
       </div>
       <div className="menu-right">
+        <button
+          className="menu-theme"
+          onClick={toggleTheme}
+          title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+          aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+        >
+          {theme === 'dark'
+            ? <DarkModeIcon sx={{ fontSize: 18, color: 'var(--gruvbox-blue)' }} />
+            : <LightModeIcon sx={{ fontSize: 18, color: 'var(--gruvbox-yellow)' }} />}
+        </button>
         <button className="menu-terminal" onClick={openTerminal} aria-label="Open terminal">
           &gt;_
         </button>
@@ -113,6 +144,25 @@ export function MenuBar({ firstName, lastName }: MenuBarProps) {
         .menu-terminal:hover {
           background: var(--bg-tertiary);
           border-color: var(--accent);
+        }
+
+        .menu-theme {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 4px;
+          background: transparent;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: transform 0.15s, opacity 0.15s;
+          opacity: 0.85;
+        }
+
+        .menu-theme:hover {
+          opacity: 1;
+          transform: scale(1.12);
+          background: var(--bg-tertiary);
         }
 
         .menu-clock {

@@ -28,6 +28,32 @@
   --font-system: 'Cutive Mono', 'SF Mono', 'Fira Code', 'Consolas', monospace;
 }
 
+/* Gruvbox Light Hard theme — palette from ../fitness-tracker's tailwind.config.js (gb.light.*) */
+:root[data-theme='light'] {
+  --bg-primary: #f7f2e2;
+  --bg-secondary: #e5e1c8;
+  --bg-tertiary: #dccb9e;
+  --border-color: #cdb992;
+
+  --text-primary: #3c3836;
+  --text-secondary: #504945;
+  --text-muted: #665c54;
+
+  /* accent-dark has no direct equivalent in the fitness-tracker light palette
+     (its light theme doesn't use a filled accent chip) — derived as a ~15%
+     aqua tint over bg-primary so selected/filled states keep a green identity. */
+  --accent-dark: #dbdecc;
+  --accent: #3a6b4d;
+  --accent-light: #68630c;
+
+  --gruvbox-red: #9d0006;
+  --gruvbox-green: #68630c;
+  --gruvbox-yellow: #86570f;
+  --gruvbox-blue: #076678;
+  --gruvbox-purple: #8f3f71;
+  --gruvbox-orange: #af3a03;
+}
+
 @theme inline {
   --color-background: var(--bg-primary);
   --color-foreground: var(--text-primary);

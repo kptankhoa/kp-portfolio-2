@@ -25,7 +25,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Applies the saved theme before paint so there's no flash of the wrong theme on load. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: 'try{if(localStorage.getItem(\'theme\')===\'light\'){document.documentElement.dataset.theme=\'light\';}}catch(e){}',
+          }}
+        />
+      </head>
       <body className={cutive.className}>
         {children}
       </body>

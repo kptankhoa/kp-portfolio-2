@@ -59,6 +59,8 @@ export const ForestIcon = createIcon(ICON_PATHS.Forest);
 export const ChevronRightIcon = createIcon(ICON_PATHS.ChevronRight);
 export const ArrowBackIcon = createIcon(ICON_PATHS.ArrowBack);
 export const OpenInNewIcon = createIcon(ICON_PATHS.OpenInNew);
+export const LightModeIcon = createIcon(ICON_PATHS.LightMode);
+export const DarkModeIcon = createIcon(ICON_PATHS.DarkMode);
 
 // Icon map for portfolio items (files, apps, etc.)
 export const itemIconMap: Record<string, ComponentType<IconProps>> = {
