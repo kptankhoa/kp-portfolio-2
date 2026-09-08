@@ -27,15 +27,24 @@ const COMMANDS = ['help', 'ls', 'cd', 'pwd', 'cat', 'open', 'whoami', 'neofetch'
 const PATH_COMMANDS = ['ls', 'cd', 'cat', 'open'];
 const OPEN_SHORTCUTS = ['resume', 'github', 'linkedin', 'telegram', 'whatsapp', 'email'];
 
-const NEOFETCH = [
-  ' ██╗  ██╗██████╗       guest@kpos',
-  ' ██║ ██╔╝██╔══██╗      ──────────',
-  ' █████╔╝ ██████╔╝      OS: kpOS 1.0 (Gruvbox Dark)',
-  ' ██╔═██╗ ██╔═══╝       Shell: kpsh',
-  ' ██║  ██╗██║           Font: Cutive Mono',
-  ' ╚═╝  ╚═╝╚═╝           Stack: Next.js · React · TypeScript',
-  '                       Host: Cloudflare',
-];
+function neofetchOutput(): string[] {
+  const isLight = typeof document !== 'undefined' && document.documentElement.dataset.theme === 'light';
+  const themeLabel = isLight ? 'Gruvbox Light' : 'Gruvbox Dark';
+
+  // Plain ASCII (no box-drawing glyphs): Cutive Mono doesn't cover characters
+  // like █ or ╗, so the browser silently falls back to a different font for
+  // them, and that font's cell width doesn't match Cutive Mono's — breaking
+  // column alignment even though every line here has the same character count.
+  return [
+    '  _  _______     guest@kpos',
+    ' | |/ /  __ \\    ----------',
+    ` | ' /| |__) |   OS: kpOS 1.0 (${themeLabel})`,
+    ' |  < |  ___/    Shell: kpsh',
+    ' | . \\| |        Font: Cutive Mono',
+    ' |_|\\_\\_|        Stack: Next.js · React · TypeScript',
+    '                 Host: Cloudflare',
+  ];
+}
 
 function nodeAt(path: string[], data: PortfolioItem[]): PortfolioItem | null {
   let items = data;
@@ -123,7 +132,7 @@ export function runCommand(
       ],
     };
   case 'neofetch':
-    return { output: NEOFETCH };
+    return { output: neofetchOutput() };
   case 'ls': {
     const res = arg ? resolve(cwd, arg, data) : { path: cwd };
     if ('error' in res) {

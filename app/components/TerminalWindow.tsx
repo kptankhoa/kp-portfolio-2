@@ -11,15 +11,20 @@ interface TermLine {
   kind: 'input' | 'output';
 }
 
-const WELCOME: TermLine[] = [
-  { text: 'kpOS 1.0 (Gruvbox Dark) — kpsh', kind: 'output' },
-  { text: 'type \'help\' to get started', kind: 'output' },
-];
+function buildWelcome(): TermLine[] {
+  const isLight = typeof document !== 'undefined' && document.documentElement.dataset.theme === 'light';
+  const themeLabel = isLight ? 'Gruvbox Light' : 'Gruvbox Dark';
+
+  return [
+    { text: `kpOS 1.0 (${themeLabel}) — kpsh`, kind: 'output' },
+    { text: 'type \'help\' to get started', kind: 'output' },
+  ];
+}
 
 export function TerminalWindow() {
   const { terminalOpen, closeTerminal, navigateToPath } = useFinder();
   const isMobile = useIsMobile();
-  const [lines, setLines] = useState<TermLine[]>(WELCOME);
+  const [lines, setLines] = useState<TermLine[]>(buildWelcome);
   const [input, setInput] = useState('');
   const [cwd, setCwd] = useState<string[]>([]);
   const [history, setHistory] = useState<string[]>([]);
@@ -98,6 +103,12 @@ export function TerminalWindow() {
       window.open(result.openUrl, '_blank', 'noopener,noreferrer');
     }
     if (result.closeTerminal) {
+      // The `exit` command ends the session: reopening should welcome fresh,
+      // unlike closing via the window controls which just hides the window.
+      setLines(buildWelcome());
+      setCwd([]);
+      setHistory([]);
+      setHistoryIndex(-1);
       handleClose();
     }
   };
@@ -425,7 +436,7 @@ export function TerminalWindow() {
         .term-line {
           white-space: pre-wrap;
           word-break: break-word;
-          line-height: 1.5;
+          line-height: 1.3;
           color: var(--text-secondary);
         }
 
@@ -435,7 +446,7 @@ export function TerminalWindow() {
 
         .term-input-line {
           position: relative;
-          line-height: 1.5;
+          line-height: 1.3;
           word-break: break-word;
         }
 
