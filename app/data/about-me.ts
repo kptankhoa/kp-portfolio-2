@@ -59,27 +59,9 @@ const resumeFile: PortfolioItem = {
   },
 };
 
-const linksFile: PortfolioItem = {
-  id: 'links',
-  name: 'links.txt',
-  type: 'file',
-  icon: 'link',
-  content: {
-    title: 'Connect with me',
-    description: `My email: ${summaryData.email}\nFind me on these platforms:`,
-    links: [
-      { label: 'Email', url: `mailto:${summaryData.email}`, icon: 'email' },
-      { label: 'GitHub', url: summaryData.socialLinks.github, icon: 'github' },
-      { label: 'LinkedIn', url: summaryData.socialLinks.linkedin, icon: 'linkedin' },
-      { label: 'Telegram', url: summaryData.socialLinks.telegram, icon: 'telegram' },
-      { label: 'WhatsApp', url: summaryData.socialLinks.whatsapp, icon: 'whatsapp' },
-    ],
-  },
-};
-
 export const aboutMeFolder: PortfolioItem = {
   id: 'about-me',
   name: 'about me',
   type: 'folder',
-  children: [bioFile, skillsFile, resumeFile, linksFile],
+  children: [bioFile, skillsFile, resumeFile],
 };

@@ -5,7 +5,7 @@ import { PortfolioItem } from './types';
 import { projectsFolder } from './projects';
 import { aboutMeFolder } from './about-me';
 import { experienceFolder } from './experience';
-import { imagesFolder } from './images';
+import { contactFile } from './contact';
 
 const terminalApp: PortfolioItem = {
   id: 'terminal',
@@ -18,6 +18,6 @@ export const portfolioData: PortfolioItem[] = [
   aboutMeFolder,
   experienceFolder,
   projectsFolder,
-  imagesFolder,
+  contactFile,
   terminalApp,
 ];
