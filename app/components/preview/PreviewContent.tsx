@@ -123,11 +123,15 @@ export function PreviewContent({ item }: PreviewContentProps) {
         }
 
         .preview-title {
-          margin: 0 0 8px 0;
+          margin: 0;
           font-size: 28px;
           font-weight: 600;
           color: var(--text-primary);
           line-height: 1.2;
+        }
+
+        .preview-titles > .preview-title:not(:last-child) {
+          margin-bottom: 8px;
         }
 
         .preview-subtitle {
