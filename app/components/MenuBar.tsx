@@ -67,14 +67,19 @@ export function MenuBar({ firstName, lastName }: MenuBarProps) {
       </div>
       <div className="menu-right">
         <button
+          type="button"
+          role="switch"
+          aria-checked={theme === 'light'}
           className="menu-theme"
           onClick={toggleTheme}
           title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
           aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
         >
-          {theme === 'dark'
-            ? <DarkModeIcon sx={{ fontSize: 18, color: 'var(--gruvbox-blue)' }} />
-            : <LightModeIcon sx={{ fontSize: 18, color: 'var(--gruvbox-yellow)' }} />}
+          <span className={`theme-thumb${theme === 'light' ? ' theme-thumb-right' : ''}`}>
+            {theme === 'dark'
+              ? <DarkModeIcon sx={{ fontSize: 11, color: 'var(--gruvbox-blue)' }} />
+              : <LightModeIcon sx={{ fontSize: 11, color: 'var(--gruvbox-yellow)' }} />}
+          </span>
         </button>
         <button className="menu-terminal" onClick={openTerminal} aria-label="Open terminal">
           &gt;_
@@ -147,22 +152,39 @@ export function MenuBar({ firstName, lastName }: MenuBarProps) {
         }
 
         .menu-theme {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 4px;
-          background: transparent;
-          border: none;
-          border-radius: 4px;
+          position: relative;
+          flex-shrink: 0;
+          box-sizing: border-box;
+          width: 34px;
+          height: 20px;
+          padding: 0;
+          background: var(--bg-tertiary);
+          border: 1px solid var(--border-color);
+          border-radius: 999px;
           cursor: pointer;
-          transition: transform 0.15s, opacity 0.15s;
-          opacity: 0.85;
+          transition: border-color 0.15s;
         }
 
         .menu-theme:hover {
-          opacity: 1;
-          transform: scale(1.12);
-          background: var(--bg-tertiary);
+          border-color: var(--accent);
+        }
+
+        .theme-thumb {
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          width: 14px;
+          height: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--bg-secondary);
+          border-radius: 50%;
+          transition: transform 0.2s ease;
+        }
+
+        .theme-thumb-right {
+          transform: translateX(14px);
         }
 
         .menu-clock {
