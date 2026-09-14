@@ -66,6 +66,9 @@ export function MenuBar({ firstName, lastName }: MenuBarProps) {
         </span>
       </div>
       <div className="menu-right">
+        <button className="menu-terminal" onClick={openTerminal} aria-label="Open terminal">
+          &gt;_
+        </button>
         <button
           type="button"
           role="switch"
@@ -80,9 +83,6 @@ export function MenuBar({ firstName, lastName }: MenuBarProps) {
               ? <DarkModeIcon sx={{ fontSize: 11, color: 'var(--gruvbox-blue)' }} />
               : <LightModeIcon sx={{ fontSize: 11, color: 'var(--gruvbox-yellow)' }} />}
           </span>
-        </button>
-        <button className="menu-terminal" onClick={openTerminal} aria-label="Open terminal">
-          &gt;_
         </button>
         {clock && (
           <span className="menu-clock">
