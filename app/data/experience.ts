@@ -34,9 +34,11 @@ const onpremProject: PortfolioItem = {
     description: `Maintaining a Digital Asset Management system built on Nuxeo for PVH Corp (Calvin Klein, Tommy Hilfiger).
 
 Key responsibilities:
-• Maintaining the central storage for all marketing and e-commerce images, videos, and 3D files
+• Building listeners and automation for data handling, including custom image renditions via ImageMagick
+• Diagnosed a stuck-batch failure that was silently blocking the automated processing pipeline, and shipped a retry-safe fix
+• Building ad-hoc tooling to bulk resync data on client request
 • Building custom workflows and metadata using Nuxeo Studio
-• Keeping the system stable and fast for global teams`,
+• Keeping the system stable and fast for global marketing and e-commerce teams`,
     tagSections: [
       {
         title: 'Technologies',
@@ -59,9 +61,8 @@ const carmaProject: PortfolioItem = {
 Carma enables companies to fund reforestation projects in the UK, Kenya, Brazil, and USA, as well as kelp restoration in Canada. They also support UK veterans through tree planting programs.
 
 Key responsibilities:
-• Implementing the new landing page with modern design
-• Building responsive UI components
-• Ensuring fast performance and SEO optimization`,
+• Independently built most of the new 10+ page site, including reusable components and GraphQL-backed content
+• Implementing SEO metadata and structured tags per provided specs`,
     tagSections: [
       {
         title: 'Technologies',
@@ -82,10 +83,10 @@ const balProject: PortfolioItem = {
     description: `Maintaining the UI for BAL's (Berry Appleman & Leiden) case management system, which handles immigration cases for corporate clients worldwide.
 
 Key responsibilities:
-• Maintaining and enhancing the frontend for case tracking and management
-• Working with legacy AngularJS components alongside modern React
-• Collaborating with backend teams on .NET API integrations
-• Ensuring smooth user experience for legal teams handling complex immigration workflows`,
+• Shipping new case-handling flows, including a virtual credit card payment flow and a draft I-94 document flow
+• Working across a legacy AngularJS and modern React frontend, integrated with .NET APIs on AWS
+• As the sole offshore engineer on a 6-7 person team, routinely surfacing and triaging issues ahead of the US client's working day
+• Onboarding newly joined in-house engineers on the codebase and debugging workflow`,
     tagSections: [
       {
         title: 'Technologies',
@@ -143,7 +144,11 @@ Key features include:
 • AI chatbot integration to assist medical professionals and patients with digital healthcare management
 • Support for hospital management and professional clinical activities
 
-The platform was deployed at major institutions including the 108 Military Central Hospital in Vietnam, accelerating digital transformation in healthcare. Built using NVIDIA's accelerated computing resources and integrated into VinBrain's broader AI product ecosystem alongside DrAid.`,
+The platform was deployed at major institutions including the 108 Military Central Hospital in Vietnam, accelerating digital transformation in healthcare. Built using NVIDIA's accelerated computing resources and integrated into VinBrain's broader AI product ecosystem alongside DrAid.
+
+My contributions:
+• Identified that REST polling caused noticeable wait time in the chatbot's chat flow; proposed and built a WebSocket-based streaming solution, parsing incrementally-returned responses to render smooth real-time chat animations
+• Built doctor-facing web features and backend services with Java Spring and PostgreSQL`,
     tagSections: [
       {
         title: 'Technologies',
@@ -168,7 +173,9 @@ Key products include:
 • DrAid Liver Cancer CT: Oncology tool for segmentation and classification of liver lesions with LI-RADS classification
 • DrAid AI PACS Cloud: Cloud-based storage and workflow solution for remote access to medical records
 
-The platform is used by nearly 2,000 doctors across 100+ hospitals including facilities in the U.S., Vietnam, and Myanmar. Strategic partnerships with Stanford University, Microsoft Azure, and NVIDIA helped reduce image interpretation time by up to 30%.`,
+The platform is used by nearly 2,000 doctors across 100+ hospitals including facilities in the U.S., Vietnam, and Myanmar. Strategic partnerships with Stanford University, Microsoft Azure, and NVIDIA helped reduce image interpretation time by up to 30%.
+
+My contribution: worked on the doctor-facing frontend alongside the wider DrAid team.`,
     tagSections: [
       {
         title: 'Technologies',
