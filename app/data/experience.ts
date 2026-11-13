@@ -23,15 +23,15 @@ const codelinkAbout: PortfolioItem = {
   },
 };
 
-const onpremProject: PortfolioItem = {
-  id: 'onprem-project',
-  name: 'OnPrem DAM',
+const fashionDamProject: PortfolioItem = {
+  id: 'fashion-dam-project',
+  name: 'Fashion Retail DAM',
   type: 'app',
   icon: 'fashion',
   content: {
-    title: 'OnPrem DAM',
-    subtitle: 'Digital Asset Management System for PVH Corp',
-    description: `Maintaining a Digital Asset Management system built on Nuxeo for PVH Corp (Calvin Klein, Tommy Hilfiger).
+    title: 'Fashion Retail DAM',
+    subtitle: 'Digital Asset Management System for a Global Fashion Retailer',
+    description: `Maintaining a Digital Asset Management system built on Nuxeo for a global fashion retailer with multiple apparel brands.
 
 Key responsibilities:
 • Building listeners and automation for data handling, including custom image renditions via ImageMagick
@@ -48,17 +48,17 @@ Key responsibilities:
   },
 };
 
-const carmaProject: PortfolioItem = {
-  id: 'carma-project',
-  name: 'Carma',
+const climateProject: PortfolioItem = {
+  id: 'climate-project',
+  name: 'Climate Platform',
   type: 'app',
   icon: 'eco',
   content: {
-    title: 'Carma Earth',
+    title: 'Climate Platform',
     subtitle: 'Landing Page for Climate Action Platform',
-    description: `Building a new landing page for Carma Earth, a B Corp certified sustainability platform that helps businesses offset their carbon footprint.
+    description: `Building a new landing page for a B Corp certified sustainability platform that helps businesses offset their carbon footprint.
 
-Carma enables companies to fund reforestation projects in the UK, Kenya, Brazil, and USA, as well as kelp restoration in Canada. They also support UK veterans through tree planting programs.
+The platform enables companies to fund reforestation projects in the UK, Kenya, Brazil, and USA, as well as kelp restoration in Canada. They also support UK veterans through tree planting programs.
 
 Key responsibilities:
 • Independently built most of the new 10+ page site, including reusable components and GraphQL-backed content
@@ -72,15 +72,15 @@ Key responsibilities:
   },
 };
 
-const balProject: PortfolioItem = {
-  id: 'bal-project',
-  name: 'BAL',
+const immigrationProject: PortfolioItem = {
+  id: 'immigration-project',
+  name: 'Immigration Case Mgmt',
   type: 'app',
   icon: 'work',
   content: {
-    title: 'BAL Case Management',
+    title: 'Immigration Case Management',
     subtitle: 'Immigration Case Handling Platform',
-    description: `Maintaining the UI for BAL's (Berry Appleman & Leiden) case management system, which handles immigration cases for corporate clients worldwide.
+    description: `Maintaining the UI for a global immigration law firm's case management system, which handles immigration cases for corporate clients worldwide.
 
 Key responsibilities:
 • Shipping new case-handling flows, including a virtual credit card payment flow and a draft I-94 document flow
@@ -102,7 +102,7 @@ const codelinkCompany: PortfolioItem = {
   subtitle: 'Full Stack Developer',
   type: 'folder',
   folderImage: '/codelink.png',
-  children: [codelinkAbout, balProject, carmaProject, onpremProject],
+  children: [codelinkAbout, immigrationProject, climateProject, fashionDamProject],
 };
 
 // ============================================
