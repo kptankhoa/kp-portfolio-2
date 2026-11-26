@@ -6,7 +6,7 @@ export const summaryData = {
   email: 'me@kptankhoa.dev',
   img: 'https://bucket.kptankhoa.dev/KPrune.jpg',
   resumeUrl: 'https://resume.kptankhoa.dev',
-  resumeFileUrl: 'https://bucket.kptankhoa.dev/resume_260914.pdf',
+  resumeFileUrl: 'https://bucket.kptankhoa.dev/resume.pdf',
   description: 'Passionate about building elegant solutions through code, I\'m committed to continuous growth as an engineer. My curiosity extends beyond software-exploring the world around me shapes how I think and solve problems.',
   socialLinks: {
     github: 'https://github.com/kptankhoa',
